@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate PDF - Shiraz Store</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f7;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .preview-area {
+            border: 2px solid #e0e0e0;
+            padding: 20px;
+            background: white;
+            margin: 20px 0;
+            min-height: 400px;
+        }
+        button {
+            background: #0071e3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        .btn-success {
+            background: #28a745;
+        }
+        .btn-success:hover {
+            background: #218838;
+        }
+        .status-info {
+            background: #e7f3ff;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 4px solid #0071e3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📄 Generate PDF Document</h1>
+        
+        <!-- ADDED: Status information display -->
+        <div class="status-info">
+            <strong>Customer:</strong> <span id="customerName">Loading...</span> | 
+            <strong>Claim ID:</strong> <span id="claimId">Loading...</span> |
+            <strong>Product:</strong> <span id="productName">Loading...</span>
+        </div>
+        
+        <p>Click the button below to generate and download your iDevice Claim PDF.</p>
+        
+        <div id="preview" class="preview-area">
+            <div class="loading">Loading preview...</div>
+        </div>
+        
+        <div>
+            <button onclick="generatePDF()" class="btn-success">⬇️ Download PDF</button>
+            <button onclick="window.print()" class="btn-secondary">🖨️ Print</button>
+            <button onclick="window.close()" class="btn-secondary">❌ Close</button>
+        </div>
+        
+        <p style="color: #666; margin-top: 20px; font-size: 14px;">
+            The PDF will be generated in A4 format. You can also use the browser's print function (Ctrl+P) and select "Save as PDF".
+        </p>
+    </div>
+
+    <script>
+        // Parse URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const data = {
+            name: decodeURIComponent(urlParams.get('name') || ''),
+            email: decodeURIComponent(urlParams.get('email') || ''),
+            phone: decodeURIComponent(urlParams.get('phone') || ''),
+            address: decodeURIComponent(urlParams.get('address') || ''),
+            product: urlParams.get('product') || 'iphone15',
+            color: decodeURIComponent(urlParams.get('color') || ''),
+            storage: decodeURIComponent(urlParams.get('storage') || ''),
+            qty: urlParams.get('qty') || '1',
+            claimId: decodeURIComponent(urlParams.get('claimId') || '')
+        };
+
+        // ADDED: Function to get product title
+        function getProductTitle(productKey) {
+            const products = {
+                iphone15: 'iPhone 15 Pro Max',
+                iphone14: 'iPhone 14 Pro Max',
+                ipadair: '13-inch iPad Air with M3',
+                macbook15: '15-inch MacBook Air with M3'
+            };
+            return products[productKey] || 'Unknown Product';
+        }
+
+        // ADDED: Update status info display
+        document.getElementById('customerName').textContent = data.name.split(' ')[0] || 'Customer';
+        document.getElementById('claimId').textContent = data.claimId || 'N/A';
+        document.getElementById('productName').textContent = getProductTitle(data.product);
+
+        // Product data
+        const PRODUCTS = {
+            iphone15: {
+                title: 'iPhone 15 Pro Max',
+                price: '{Sponsored}',
+                color: 'On admin activation',
+                storage: 'On admin activation',
+                description: `Premium smartphone with A17 Pro chip, ProMotion display, titanium design, and professional camera system. Features 48MP main camera, Action mode, and all-day battery life.`,
+                image: 'https://ideviceclaim.github.io/applclaim/idevice_iphone15promax.jpg'
+            },
+            iphone14: {
+                title: 'iPhone 14 Pro Max',
+                price: '{Sponsored}',
+                color: 'On admin activation',
+                storage: 'On admin activation',
+                description: `iPhone 14 Pro Max: Powerful and Pro-Grade. Featuring the groundbreaking 48MP Main camera and Dynamic Island. Powered by A16 Bionic. Includes a one-year limited warranty.`,
+                image: 'https://ideviceclaim.github.io/applclaim/idevice_iphone14promax.jpg'
+            },
+            ipadair: {
+                title: '13-inch iPad Air with M3',
+                price: '{Sponsored}',
+                color: 'On admin activation',
+                storage: 'On admin activation',
+                description: `13-inch iPad Air with M3: Big on Power, Ready for Anything. Includes a 20W USB-C adapter and a one-year limited warranty.`,
+                image: 'https://ideviceclaim.github.io/applclaim/idevice_13inchiPad.jpg'
+            },
+            macbook15: {
+                title: '15-inch MacBook Air with M3',
+                price: '{Sponsored}',
+                color: 'On admin activation',
+                storage: 'On admin activation',
+                description: `15-inch MacBook Air with M3: Big Screen. Blazing Fast. Includes a 35W power adapter and a one-year limited warranty.`,
+                image: 'https://ideviceclaim.github.io/applclaim/idevice_15inchMacBook.jpg'
+            }
+        };
+
+        // Build the A4 HTML content
+        function buildA4Content() {
+            const product = PRODUCTS[data.product];
+            const dateTime = new Date().toLocaleString();
+            const logoUrl = 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/Shiraz.jpg';
+
+            return `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="utf-8">
+                    <style>
+                        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+                        body { background: white; padding: 0; margin: 0; }
+                        .a4-page { 
+                            width: 21cm; 
+                            min-height: 29.7cm; 
+                            padding: 1.5cm; 
+                            margin: 0 auto;
+                            background: white;
+                            position: relative;
+                        }
+                        .header { 
+                            display: flex; 
+                            align-items: center; 
+                            gap: 14px; 
+                            margin-bottom: 20px; 
+                            border-bottom: 2px solid #e0e0e0; 
+                            padding-bottom: 15px; 
+                        }
+                        .logo { width: 40px; height: 40px; object-fit: cover; border-radius: 6px; }
+                        .title { margin: 0; color: #0071e3; font-size: 20px; font-weight: 700; }
+                        .subtitle { margin: 0; color: #6b7280; font-size: 14px; }
+                        .status { text-align: right; color: #059669; font-size: 14px; font-weight: bold; }
+                        .date-time { text-align: right; margin-bottom: 20px; font-size: 14px; color: #6d6d6f; }
+                        .section { margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; }
+                        .section h2 { font-size: 16px; margin-bottom: 10px; color: #1d1d1f; }
+                        .user-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+                        .info-label { font-weight: bold; color: #424245; font-size: 14px; }
+                        .info-value { color: #6d6d6f; font-size: 14px; }
+                        .product-card { 
+                            display: flex; 
+                            gap: 20px; 
+                            margin: 15px 0; 
+                            padding: 15px; 
+                            background: white; 
+                            border-radius: 8px;
+                            border: 1px solid #e0e0e0;
+                        }
+                        .product-image { width: 180px; height: 140px; object-fit: cover; border-radius: 8px; }
+                        .product-title { font-size: 18px; color: #1d1d1f; margin-bottom: 10px; font-weight: bold; }
+                        .product-description { font-size: 14px; color: #6d6d6f; margin-bottom: 12px; line-height: 1.4; }
+                        .product-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 14px; }
+                        .spec-label { font-weight: bold; color: #424245; }
+                        .spec-value { color: #6d6d6f; }
+                        .storage-options { 
+                            display: flex; 
+                            justify-content: space-between; 
+                            margin: 20px 0; 
+                            gap: 10px;
+                        }
+                        .storage-option { 
+                            flex: 1; 
+                            text-align: center; 
+                            padding: 12px; 
+                            background: #f8f9fa; 
+                            border-radius: 6px; 
+                            border: 2px solid #e0e0e0; 
+                            font-size: 14px; 
+                            color: #424245; 
+                            font-weight: bold; 
+                        }
+                        .footer { 
+                            position: absolute; 
+                            bottom: 1.5cm; 
+                            left: 1.5cm; 
+                            right: 1.5cm; 
+                            text-align: center; 
+                            font-size: 12px; 
+                            color: #6d6d6f; 
+                            border-top: 1px solid #e0e0e0; 
+                            padding-top: 10px; 
+                        }
+                        @media print {
+                            body { background: white; }
+                            .a4-page { box-shadow: none; margin: 0; padding: 1.5cm; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="a4-page">
+                        <!-- Header -->
+                        <div class="header">
+                            <img class="logo" src="${logoUrl}" alt="Shiraz Logo" onerror="this.style.display='none'">
+                            <div style="flex:1">
+                                <div style="display:flex; align-items:center; justify-content:space-between">
+                                    <div>
+                                        <div class="title">SHIRAZ STORE – IDEVICE CLAIM ACTIVATION SUMMARY</div>
+                                        <div class="subtitle">Formal summary & activation document</div>
+                                    </div>
+                                    <div class="status">✅ APPROVED</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="date-time">Generated: ${dateTime}</div>
+
+                        <!-- Customer Information -->
+                        <div class="section">
+                            <h2>CUSTOMER INFORMATION</h2>
+                            <div class="user-details">
+                                <div>
+                                    <div class="info-label">Full Name:</div>
+                                    <div class="info-value">${data.name}</div>
+                                </div>
+                                <div>
+                                    <div class="info-label">Email:</div>
+                                    <div class="info-value">${data.email}</div>
+                                </div>
+                                <div>
+                                    <div class="info-label">Phone:</div>
+                                    <div class="info-value">${data.phone}</div>
+                                </div>
+                                <div>
+                                    <div class="info-label">Claim ID:</div>
+                                    <div class="info-value">${data.claimId}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Address -->
+                        <div class="section">
+                            <h2>DELIVERY ADDRESS</h2>
+                            <div class="info-value" style="white-space: pre-line;">${data.address}</div>
+                        </div>
+
+                        <!-- Product Information -->
+                        <div class="section">
+                            <h2>DEVICE MODEL</h2>
+                            <div class="product-title">${product.title}</div>
+                            
+                            <div class="product-card">
+                                <img src="${product.image}" alt="${product.title}" class="product-image">
+                                <div style="flex:1">
+                                    <div class="product-description">${product.description}</div>
+                                    <div class="product-specs">
+                                        <div><span class="spec-label">Color:</span> <span class="spec-value">${data.color || product.color}</span></div>
+                                        <div><span class="spec-label">Storage:</span> <span class="spec-value">${data.storage || product.storage}</span></div>
+                                        <div><span class="spec-label">Price:</span> <span class="spec-value">${product.price}</span></div>
+                                        <div><span class="spec-label">Quantity:</span> <span class="spec-value">${data.qty}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="storage-options">
+                                <div class="storage-option">256GB</div>
+                                <div class="storage-option">512GB</div>
+                                <div class="storage-option">1TB</div>
+                            </div>
+
+                            <div style="text-align: center; margin-top: 15px; font-size: 13px; color: #6d6d6f;">
+                                Activation Required: https://activate.apple.com/idevic%agency%shiraz%2509!
+                            </div>
+                        </div>
+
+                        <!-- Instructions -->
+                        <div class="section">
+                            <h2>NEXT STEPS</h2>
+                            <div style="font-size: 14px; color: #424245; line-height: 1.5;">
+                                <p>Your iDevice claim has been approved. To complete activation and schedule delivery:</p>
+                                <ol style="margin: 10px 0 10px 20px;">
+                                    <li>Contact Shiraz Store via WhatsApp with your Claim ID</li>
+                                    <li>Confirm your preferred storage capacity</li>
+                                    <li>Complete the activation process</li>
+                                    <li>Schedule delivery (typically 3-5 business days)</li>
+                                </ol>
+                                <p><strong>WhatsApp:</strong> https://wa.me/qr/GMUIPAULE4VQM1</p>
+                            </div>
+                        </div>
+
+                        <div class="footer">
+                            Shiraz Store • Digital Service Center • Shah Alam, Selangor<br>
+                            Email: shirazstore@icloud.com • ©2025 • Page 1 of 1
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `;
+        }
+
+        // Display preview
+        function displayPreview() {
+            const preview = document.getElementById('preview');
+            preview.innerHTML = buildA4Content();
+        }
+
+        // Generate PDF
+        async function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            // Get the preview element
+            const element = document.getElementById('preview');
+            
+            try {
+                // Show loading state
+                const originalHTML = element.innerHTML;
+                element.innerHTML = '<div class="loading">Generating PDF... Please wait</div>';
+                
+                // Use html2canvas to capture the content
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: false,
+                    scrollX: 0,
+                    scrollY: 0,
+                    width: element.scrollWidth,
+                    height: element.scrollHeight
+                });
+
+                // Restore original content
+                element.innerHTML = originalHTML;
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.9);
+                
+                // Calculate dimensions to fit A4
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+                
+                // Add image to PDF
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                
+                // Save PDF
+                const fileName = `iDevice_Claim_${data.claimId || 'document'}.pdf`;
+                pdf.save(fileName);
+                
+                // Show success message
+                alert(`✅ PDF successfully generated: ${fileName}`);
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('❌ PDF generation failed. Please use the Print button instead and select "Save as PDF". Error: ' + error.message);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displayPreview();
+        });
+    </script>
+</body>
+</html>
