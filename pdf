@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate PDF - Shiraz Store</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="libs/jspdf.umd.min.js"></script>
+    <script src="libs/html2canvas.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -70,7 +70,6 @@
     <div class="container">
         <h1>📄 Generate PDF Document</h1>
         
-        <!-- ADDED: Status information display -->
         <div class="status-info">
             <strong>Customer:</strong> <span id="customerName">Loading...</span> | 
             <strong>Claim ID:</strong> <span id="claimId">Loading...</span> |
@@ -109,23 +108,7 @@
             claimId: decodeURIComponent(urlParams.get('claimId') || '')
         };
 
-        // ADDED: Function to get product title
-        function getProductTitle(productKey) {
-            const products = {
-                iphone15: 'iPhone 15 Pro Max',
-                iphone14: 'iPhone 14 Pro Max',
-                ipadair: '13-inch iPad Air with M3',
-                macbook15: '15-inch MacBook Air with M3'
-            };
-            return products[productKey] || 'Unknown Product';
-        }
-
-        // ADDED: Update status info display
-        document.getElementById('customerName').textContent = data.name.split(' ')[0] || 'Customer';
-        document.getElementById('claimId').textContent = data.claimId || 'N/A';
-        document.getElementById('productName').textContent = getProductTitle(data.product);
-
-        // Product data
+        // Updated image URLs
         const PRODUCTS = {
             iphone15: {
                 title: 'iPhone 15 Pro Max',
@@ -133,7 +116,7 @@
                 color: 'On admin activation',
                 storage: 'On admin activation',
                 description: `Premium smartphone with A17 Pro chip, ProMotion display, titanium design, and professional camera system. Features 48MP main camera, Action mode, and all-day battery life.`,
-                image: 'https://ideviceclaim.github.io/applclaim/idevice_iphone15promax.jpg'
+                image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_iphone15promax.jpg'
             },
             iphone14: {
                 title: 'iPhone 14 Pro Max',
@@ -141,7 +124,7 @@
                 color: 'On admin activation',
                 storage: 'On admin activation',
                 description: `iPhone 14 Pro Max: Powerful and Pro-Grade. Featuring the groundbreaking 48MP Main camera and Dynamic Island. Powered by A16 Bionic. Includes a one-year limited warranty.`,
-                image: 'https://ideviceclaim.github.io/applclaim/idevice_iphone14promax.jpg'
+                image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_iphone14promax.jpg'
             },
             ipadair: {
                 title: '13-inch iPad Air with M3',
@@ -149,7 +132,7 @@
                 color: 'On admin activation',
                 storage: 'On admin activation',
                 description: `13-inch iPad Air with M3: Big on Power, Ready for Anything. Includes a 20W USB-C adapter and a one-year limited warranty.`,
-                image: 'https://ideviceclaim.github.io/applclaim/idevice_13inchiPad.jpg'
+                image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_13inchiPad.jpg'
             },
             macbook15: {
                 title: '15-inch MacBook Air with M3',
@@ -157,15 +140,24 @@
                 color: 'On admin activation',
                 storage: 'On admin activation',
                 description: `15-inch MacBook Air with M3: Big Screen. Blazing Fast. Includes a 35W power adapter and a one-year limited warranty.`,
-                image: 'https://ideviceclaim.github.io/applclaim/idevice_15inchMacBook.jpg'
+                image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_15inchMacBook.jpg'
             }
         };
+
+        function getProductTitle(productKey) {
+            return PRODUCTS[productKey]?.title || 'Unknown Product';
+        }
+
+        // Update status info display
+        document.getElementById('customerName').textContent = data.name.split(' ')[0] || 'Customer';
+        document.getElementById('claimId').textContent = data.claimId || 'N/A';
+        document.getElementById('productName').textContent = getProductTitle(data.product);
 
         // Build the A4 HTML content
         function buildA4Content() {
             const product = PRODUCTS[data.product];
             const dateTime = new Date().toLocaleString();
-            const logoUrl = 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/Shiraz.jpg';
+            const logoUrl = 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/Shiraz.jpg';
 
             return `
                 <!DOCTYPE html>
