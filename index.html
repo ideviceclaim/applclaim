@@ -55,7 +55,7 @@
 <body>
 <div class="container">
   <div class="header">
-    <img id="hdrLogo" class="logo" src="https://raw.githubusercontent.com/ideviceclaim/applclaim/main/Shiraz.jpg" alt="Shiraz Logo">
+    <img id="hdrLogo" class="logo" src="https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/Shiraz.jpg" alt="Shiraz Logo">
     <div style="flex:1">
       <div style="display:flex;align-items:center;justify-content:space-between">
         <div>
@@ -163,15 +163,45 @@
 
 <div id="toast" class="toast" style="display:none"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- LOCAL LIBRARIES -->
+<script src="libs/html2canvas.min.js"></script>
+<script src="libs/jspdf.umd.min.js"></script>
 
 <script>
+// Updated image URLs to match your new structure
 const PRODUCTS = {
-  iphone15: { title: 'iPhone 15 Pro Max', price: '{Sponsored}', color: 'On admin activation', storage: 'On admin activation', description: `Premium smartphone with A17 Pro chip, ProMotion display, titanium design, and professional camera system.`, image: 'https://ideviceclaim.github.io/applclaim/idevice_iphone15promax.jpg' },
-  iphone14: { title: 'iPhone 14 Pro Max', price: '{Sponsored}', color: 'On admin activation', storage: 'On admin activation', description: `iPhone 14 Pro Max: Powerful and Pro-Grade. Featuring the groundbreaking 48MP Main camera and Dynamic Island.`, image: 'https://ideviceclaim.github.io/applclaim/idevice_iphone14promax.jpg' },
-  ipadair: { title: '13-inch iPad Air with M3', price: '{Sponsored}', color: 'On admin activation', storage: 'On admin activation', description: `13-inch iPad Air with M3: Big on Power, Ready for Anything. Includes a 20W USB-C adapter.`, image: 'https://ideviceclaim.github.io/applclaim/idevice_13inchiPad.jpg' },
-  macbook15: { title: '15-inch MacBook Air with M3', price: '{Sponsored}', color: 'On admin activation', storage: 'On admin activation', description: `15-inch MacBook Air with M3: Big Screen. Blazing Fast. Includes a 35W power adapter.`, image: 'https://ideviceclaim.github.io/applclaim/idevice_15inchMacBook.jpg' }
+  iphone15: { 
+    title: 'iPhone 15 Pro Max', 
+    price: '{Sponsored}', 
+    color: 'On admin activation', 
+    storage: 'On admin activation', 
+    description: `Premium smartphone with A17 Pro chip, ProMotion display, titanium design, and professional camera system. Features 48MP main camera, Action mode, and all-day battery life.`, 
+    image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_iphone15promax.jpg' 
+  },
+  iphone14: { 
+    title: 'iPhone 14 Pro Max', 
+    price: '{Sponsored}', 
+    color: 'On admin activation', 
+    storage: 'On admin activation', 
+    description: `iPhone 14 Pro Max: Powerful and Pro-Grade. Featuring the groundbreaking 48MP Main camera and Dynamic Island. Powered by A16 Bionic. Includes a one-year limited warranty.`, 
+    image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_iphone14promax.jpg' 
+  },
+  ipadair: { 
+    title: '13-inch iPad Air with M3', 
+    price: '{Sponsored}', 
+    color: 'On admin activation', 
+    storage: 'On admin activation', 
+    description: `13-inch iPad Air with M3: Big on Power, Ready for Anything. Includes a 20W USB-C adapter and a one-year limited warranty.`, 
+    image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_13inchiPad.jpg' 
+  },
+  macbook15: { 
+    title: '15-inch MacBook Air with M3', 
+    price: '{Sponsored}', 
+    color: 'On admin activation', 
+    storage: 'On admin activation', 
+    description: `15-inch MacBook Air with M3: Big Screen. Blazing Fast. Includes a 35W power adapter and a one-year limited warranty.`, 
+    image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_15inchMacBook.jpg' 
+  }
 };
 
 function showToast(msg, bg='#0071e3'){ 
@@ -196,7 +226,10 @@ function prefill(){
   updateClaim();
 }
 
-function resetForm(){ prefill(); showToast('Form reset to default values'); }
+function resetForm(){ 
+  prefill(); 
+  showToast('Form reset to default values'); 
+}
 
 function updateClaim(){
   const v=(document.getElementById('phone').value||'').replace(/\D/g,'');
@@ -213,7 +246,7 @@ function quick(key){
 function buildA4Html(data){
   const product = PRODUCTS[data.product];
   const dateTime = new Date().toLocaleString();
-  const logoSrc = document.getElementById('hdrLogo').src;
+  const logoSrc = 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/Shiraz.jpg';
   
   return `
 <div style="width:21cm; min-height:29.7cm; background:white; padding:1.5cm; margin:0 auto; font-family:Arial,sans-serif; position:relative;">
@@ -402,6 +435,13 @@ function openMail(){
   const body = encodeURIComponent(`Hello ${document.getElementById('name').value || ''},\n\nYour iDevice claim has been approved. Claim ID: ${document.getElementById('claim').value || ''}\n\nRegards,\nShiraz Store`);
   window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
 }
+
+// Close modal when clicking outside
+document.getElementById('printModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closePrintModal();
+  }
+});
 
 prefill();
 </script>
