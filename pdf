@@ -174,10 +174,10 @@
                         <div style="flex:1">
                             <div style="display:flex;align-items:center;justify-content:space-between">
                                 <div>
-                                    <div style="color:#0071e3;font-size:20px;font-weight:700;line-height:1.2;">SHIRAZ APPLE STORE – IDEVICE ACTIVATION PORTAL</div>
+                                    <div style="color:#0071e3;font-size:18px;font-weight:700;line-height:1.2;">SHIRAZ APPLE STORE – IDEVICE ACTIVATION PORTAL</div>
                                     <div style="color:#6b7280;font-size:13px;margin-top:4px;">Claim summary & activation document</div>
                                 </div>
-                                <div style="text-align:left;color:#6b7280;font-size:13px">Status:<br><strong style="color:#059669;font-size:14px;">✅ APPROVED</strong></div>
+                                <div style="text-align:left;color:#6b7280;font-size:13px">Status:<br><strong style="color:#059669;font-size:13px;">✅ APPROVED</strong></div>
                             </div>
                         </div>
                     </div>
