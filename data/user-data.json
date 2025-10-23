@@ -58,7 +58,6 @@
         "insuranceBalance": 750
       }
     },
-
     "7287654321098788": {
       "claimData": {
         "fullName": "MUKHLIS BIN AHMAD",
@@ -117,7 +116,6 @@
         "insuranceBalance": 615
       }
     },
-
     "732686532057894": {
       "claimData": {
         "fullName": "NURUL IZZATIE IZZATUL BINTI MAKSUDIN",
@@ -151,5 +149,7 @@
         "insuranceBalance": 0
       }
     }
-  }
+  },
+  "agents": [],
+  "admin": {}
 }
