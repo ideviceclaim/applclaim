@@ -1,0 +1,155 @@
+{
+  "userData": {
+    "7287654321098789": {
+      "claimData": {
+        "fullName": "AHMAD LUQMAN HAKIM BIN ROSIDI",
+        "email": "luq2208@gmail.com",
+        "phoneNumber": "0139062991",
+        "deliveryAddress": "KAMPUNG BUKIT MAK LIPAH MAHLIGAI 16400 MELOR KELANTAN",
+        "iDevice": "iPhone 15 Pro Max",
+        "productId": "iphone15",
+        "claimId": "SHZ025-62991",
+        "trackingNumber": "7287654321098789"
+      },
+      "items": {
+        "itemId": "iphone15",
+        "itemName": "iPhone 15 Pro Max",
+        "quantity": 1,
+        "weight": "0.42kg"
+      },
+      "additionalInfo": {
+        "service": "DHL Express MyParcel",
+        "estimatedDelivery": "2025-10-05",
+        "currentStatus": "In Transit",
+        "insurance": "MYR 750",
+        "dimensions": "25x18x8 cm",
+        "paymentMethod": "Sponsored"
+      },
+      "history": [
+        {
+          "status": "Order Confirmed",
+          "timestamp": "2025-09-28 10:30",
+          "location": "Shiraz Store HQ",
+          "details": "iDevice claim approved and processed"
+        },
+        {
+          "status": "Processing",
+          "timestamp": "2025-09-29 14:20",
+          "location": "Shiraz Activation Center",
+          "details": "Device preparation and activation"
+        },
+        {
+          "status": "Ready for Shipment",
+          "timestamp": "2025-09-30 09:15",
+          "location": "Shiraz Logistics",
+          "details": "Package handed over to courier"
+        },
+        {
+          "status": "In Transit",
+          "timestamp": "2025-10-01 11:45",
+          "location": "Regional Hub",
+          "details": "Package in transit to destination"
+        }
+      ],
+      "dashboard": {
+        "activationFee": 0,
+        "amountPaid": 0,
+        "outstandingBalance": 0,
+        "insuranceBalance": 750
+      }
+    },
+
+    "7287654321098788": {
+      "claimData": {
+        "fullName": "MUKHLIS BIN AHMAD",
+        "email": "mukhlis.ahmad@example.com",
+        "phoneNumber": "01153774376",
+        "deliveryAddress": "Hostel Building 2, Multimedia University, Sepang, 63000, Selangor, Malaysia",
+        "iDevice": "iPhone 14 Pro Max",
+        "productId": "iphone14",
+        "claimId": "SHZ025-74376",
+        "trackingNumber": "7287654321098788"
+      },
+      "items": {
+        "itemId": "iphone14",
+        "itemName": "iPhone 14 Pro Max",
+        "quantity": 1,
+        "weight": "0.37kg"
+      },
+      "additionalInfo": {
+        "service": "DHL Express MyParcel",
+        "estimatedDelivery": "2025-10-23",
+        "currentStatus": "In Transit",
+        "insurance": "MYR 615",
+        "dimensions": "30x20x10 cm",
+        "paymentMethod": "DuitNow QR"
+      },
+      "history": [
+        {
+          "status": "Log at Service Center",
+          "timestamp": "2025-09-29 16:20",
+          "location": "Johor Bahru, Malaysia",
+          "details": "Documentation required"
+        },
+        {
+          "status": "Processing",
+          "timestamp": "2025-09-19 20:40",
+          "location": "DHL-JHR Hub, Johor Bahru",
+          "details": "Package processed for CLexp coverage"
+        },
+        {
+          "status": "Documentation Received",
+          "timestamp": "2025-10-01 08:20",
+          "location": "DHL-JHR Hub, Johor Bahru",
+          "details": "Package arrived at facility"
+        },
+        {
+          "status": "In Transit",
+          "timestamp": "2025-10-01 14:15",
+          "location": "Selangor Gateway",
+          "details": "Package confirmed for destination sorting hub"
+        }
+      ],
+      "dashboard": {
+        "activationFee": 0,
+        "amountPaid": 0,
+        "outstandingBalance": 0,
+        "insuranceBalance": 615
+      }
+    },
+
+    "732686532057894": {
+      "claimData": {
+        "fullName": "NURUL IZZATIE IZZATUL BINTI MAKSUDIN",
+        "email": "izzatiemaksudin@gmail.com",
+        "phoneNumber": "0178340428",
+        "deliveryAddress": "B-12-06, VISTA BANGI, JALAN REKO, 43000 KAJANG, SELANGOR",
+        "iDevice": "13-inch iPad Air",
+        "productId": "ipadair",
+        "claimId": "SHZ025-40428",
+        "trackingNumber": "732686532057894"
+      },
+      "items": {
+        "itemId": "ipadair",
+        "itemName": "13-inch iPad Air",
+        "quantity": 1,
+        "weight": "0.37kg"
+      },
+      "additionalInfo": {
+        "service": "DHL Express MyParcel",
+        "estimatedDelivery": "2025-10-24",
+        "currentStatus": "Pending",
+        "insurance": "MYR 0",
+        "dimensions": "30x20x10 cm",
+        "paymentMethod": "DuitNow QR"
+      },
+      "history": [],
+      "dashboard": {
+        "activationFee": 0,
+        "amountPaid": 0,
+        "outstandingBalance": 0,
+        "insuranceBalance": 0
+      }
+    }
+  }
+}
