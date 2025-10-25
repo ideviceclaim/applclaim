@@ -1,558 +1,1246 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shiraz Store — iDevice Claim & PDF Generator</title>
-    <style>
-        :root {
-            --primary: #0071e3;
-            --muted: #6b7280;
-            --bg: #f7f7f8;
-            --card: #fff;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            background: var(--bg);
-            color: #111;
-            padding: 18px;
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        
-        .header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 20px;
-        }
-        
-        .logo {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        
-        .title {
-            color: var(--primary);
-            font-size: 20px;
-            font-weight: 700;
-            margin: 0;
-        }
-        
-        .subtitle {
-            color: var(--muted);
-            font-size: 14px;
-            margin: 0;
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #374151;
-        }
-        
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-        
-        .row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .row > * {
-            flex: 1;
-        }
-        
-        .btns {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        
-        button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-        
-        .preview {
-            min-height: 500px;
-            border: 2px dashed #d1d5db;
-            border-radius: 8px;
-            padding: 20px;
-            background: white;
-            overflow: auto;
-        }
-        
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 12px 20px;
-            background: var(--primary);
-            color: white;
-            border-radius: 8px;
-            display: none;
-            z-index: 1000;
-        }
-        
-        /* Admin Styles */
-        .admin-section {
-            display: none;
-        }
-        
-        .admin-toggle {
-            background: #f59e0b;
-            color: white;
-            width: 100%;
-            margin-top: 15px;
-        }
-        
-        .admin-tabs {
-            display: flex;
-            border-bottom: 2px solid #e5e7eb;
-            margin-bottom: 20px;
-        }
-        
-        .admin-tab {
-            padding: 10px 20px;
-            background: none;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-        }
-        
-        .admin-tab.active {
-            border-bottom-color: var(--primary);
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        .admin-content {
-            display: none;
-        }
-        
-        .admin-content.active {
-            display: block;
-        }
-        
-        .json-output {
-            background: #f8f9fa;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 15px;
-            font-family: monospace;
-            font-size: 12px;
-            white-space: pre-wrap;
-            max-height: 400px;
-            overflow: auto;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shiraz Store — Checkout & PDF/Email Generator</title>
+<style>
+  /* All your existing CSS styles remain the same */
+  :root{ --primary:#0071e3; --muted:#6b7280; --bg:#f7f7f8; --card:#fff; }
+  *{box-sizing:border-box}
+  body{margin:0;padding:18px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:#111}
+  .container{max-width:1100px;margin:0 auto}
+  .header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+  .logo{width:30px;height:30px;object-fit:cover;border-radius:4px}
+  .title{margin:0;color:var(--primary);font-size:18px;font-weight:700}
+  .subtitle{margin:0;color:var(--muted);font-size:13px}
+  .grid{display:grid;grid-template-columns:1fr 480px;gap:16px}
+  @media(max-width:1000px){ .grid{grid-template-columns:1fr} }
+  .card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 8px 26px rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.04)}
+  label{display:block;font-weight:700;margin-bottom:6px}
+  input[type=text], input[type=email], input[type=number], textarea, select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e6e8;background:#fff;font-size:15px}
+  textarea{min-height:80px}
+  .row{display:flex;gap:10px}
+  .row>*{flex:1}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  button{padding:10px 12px;border-radius:10px;border:none;font-weight:800;cursor:pointer}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary)}
+  .btn-plain{background:#374151;color:#fff}
+  .btn-print{background:#059669;color:#fff}
+  .btn-pdf{background:#dc2626;color:#fff}
+  .preview{min-height:520px;border-radius:10px;border:2px solid #e6e6e8;padding:10px;background:#fff;overflow:auto;position:relative}
+  .small{font-size:13px;color:var(--muted)}
+  .watermark{position:absolute;opacity:0.07;pointer-events:none;transform:rotate(-20deg);right:-20px;bottom:80px;width:60%}
+  .footer-note{font-size:13px;color:var(--muted);margin-top:10px}
+  .toast{position:fixed;right:18px;top:18px;padding:10px 14px;border-radius:8px;color:white;display:none;z-index:9999}
+  .email-preview{min-height:520px;border-radius:10px;border:2px solid #e6e6e8;padding:10px;background:#fff;overflow:auto}
+  
+  .print-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); display: none; justify-content: center; 
+    align-items: center; z-index: 10000;
+  }
+  .print-modal-content {
+    background: white; padding: 20px; border-radius: 12px;
+    max-width: 90%; max-height: 90%; overflow: auto; position: relative;
+  }
+  .print-modal-close {
+    position: absolute; top: 10px; right: 10px;
+    background: #dc2626; color: white; border: none;
+    padding: 8px 12px; border-radius: 6px; cursor: pointer;
+  }
+
+  /* Admin Section Styles */
+  .admin-section {
+    margin-top: 12px;
+    display: none;
+  }
+  .admin-toggle {
+    background: #f97316;
+    color: white;
+    margin-top: 12px;
+    width: 100%;
+  }
+  .admin-panel {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 12px;
+  }
+  .admin-tabs {
+    display: flex;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+  }
+  .admin-tab {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid transparent;
+  }
+  .admin-tab.active {
+    border-bottom: 2px solid var(--primary);
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .admin-content {
+    display: none;
+  }
+  .admin-content.active {
+    display: block;
+  }
+  .tracking-update {
+    background: #e7f3ff;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  .tracking-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .tracking-row input, .tracking-row select {
+    flex: 1;
+  }
+  .tracking-history {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 10px;
+    background: white;
+  }
+  .tracking-item {
+    padding: 8px;
+    border-bottom: 1px solid #f1f3f4;
+    display: flex;
+    justify-content: space-between;
+  }
+  .tracking-item:last-child {
+    border-bottom: none;
+  }
+  .tracking-actions {
+    display: flex;
+    gap: 5px;
+  }
+  .btn-small {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  .btn-danger {
+    background: #dc2626;
+    color: white;
+  }
+  .delivery-email-preview {
+    min-height: 300px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 10px;
+    background: white;
+    overflow: auto;
+  }
+  .user-list {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 10px;
+    background: white;
+  }
+  .user-item {
+    padding: 10px;
+    border-bottom: 1px solid #f1f3f4;
+    cursor: pointer;
+  }
+  .user-item:hover {
+    background: #f8f9fa;
+  }
+  .user-item:last-child {
+    border-bottom: none;
+  }
+  .json-output {
+    font-family: monospace;
+    font-size: 12px;
+    white-space: pre-wrap;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/Shiraz.jpg" alt="Shiraz Logo" class="logo">
-            <div style="flex: 1;">
-                <div class="title">SHIRAZ APPLE STORE</div>
-                <div class="subtitle">iDevice Claim Portal</div>
-            </div>
-            <div style="color: var(--muted); font-size: 12px;">
-                Status: <strong style="color: #059669;">✅ ACTIVE</strong>
-            </div>
+<div class="container">
+  <div class="header">
+    <img id="hdrLogo" class="logo" src="assets/Shiraz.jpg" alt="Shiraz Logo">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div class="title">SHIRAZ APPLE – IDEVICE CLAIM</div>
+          <div class="subtitle">summary</div>
+        </div>
+        <div style="text-align:right;color:var(--muted);font-size:12px">Status: <strong style="color:#059669">✅ APPROVED</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h3 style="margin:0 0 8px 0">Customer & Product</h3>
+        <div style="margin-top:10px"><label for="name">Full Name</label><input id="name" type="text" value="AHMAD LUQMAN HAKIM BIN ROSIDI"></div>
+        <div class="row" style="margin-top:10px">
+          <div><label for="email">Email</label><input id="email" type="email" value="luq2208@gmail.com"></div>
+          <div><label for="phone">Phone Number</label><input id="phone" type="text" value="0139062991" maxlength="18"></div>
+        </div>
+        <div style="margin-top:10px"><label for="address">Delivery Address</label><textarea id="address">KAMPUNG BUKIT MAK LIPAH MAHLIGAI 16400 MELOR KELANTAN</textarea></div>
+        <div class="row" style="margin-top:10px">
+          <div><label for="product">iDevice</label>
+            <select id="product">
+              <option value="iphone15">Apple iPhone 15 Pro Max</option>
+              <option value="iphone14">Apple iPhone 14 Pro Max</option>
+              <option value="ipadair">13-inch iPad Air with M3</option>
+              <option value="macbook15">15-inch MacBook Air with M3</option>
+            </select>
+          </div>
+          <div><label for="color">Color (Admin)</label><input id="color" type="text" value="On admin activation" disabled></div>
+          <div><label for="storage">Storage (Admin)</label><input id="storage" type="text" value="On admin activation" disabled></div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div><label>Claim ID (auto)</label><input id="claim" type="text" readonly></div>
+          <div><label>Qty</label><input id="qty" type="number" min="1" value="1"></div>
         </div>
 
-        <div class="grid">
-            <!-- Left Column -->
-            <div>
-                <div class="card">
-                    <h3 style="margin-bottom: 20px;">Customer Information</h3>
-                    
-                    <div>
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" value="AHMAD LUQMAN HAKIM BIN ROSIDI">
-                    </div>
-                    
-                    <div class="row">
-                        <div>
-                            <label for="email">Email</label>
-                            <input type="email" id="email" value="luq2208@gmail.com">
-                        </div>
-                        <div>
-                            <label for="phone">Phone Number</label>
-                            <input type="text" id="phone" value="0139062991">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="address">Delivery Address</label>
-                        <textarea id="address" rows="3">KAMPUNG BUKIT MAK LIPAH MAHLIGAI 16400 MELOR KELANTAN</textarea>
-                    </div>
-                    
-                    <div class="row">
-                        <div>
-                            <label for="product">iDevice Model</label>
-                            <select id="product">
-                                <option value="iphone15">iPhone 15 Pro Max</option>
-                                <option value="iphone14">iPhone 14 Pro Max</option>
-                                <option value="ipad">iPad Air M3</option>
-                                <option value="macbook">MacBook Air M3</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="claim">Claim ID</label>
-                            <input type="text" id="claim" value="SHZ025-2991" readonly>
-                        </div>
-                    </div>
-
-                    <div class="btns">
-                        <button class="btn-primary" onclick="generateSummary()">Generate Summary</button>
-                        <button class="btn-outline" onclick="downloadPDF()">Download PDF</button>
-                        <button class="btn-primary" onclick="toggleAdmin()">Admin Panel</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h4 style="margin-bottom: 15px;">Quick Actions</h4>
-                    <div class="row">
-                        <button class="btn-outline" onclick="quickFill('iphone15')">iPhone 15</button>
-                        <button class="btn-outline" onclick="quickFill('iphone14')">iPhone 14</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div>
-                <div class="card">
-                    <h4 style="margin-bottom: 15px;">Preview</h4>
-                    <div id="preview" class="preview">
-                        <div style="text-align: center; padding: 40px; color: #6b7280;">
-                            <p>No preview generated yet.</p>
-                            <p>Click "Generate Summary" to create your claim document.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="btns">
-                        <button class="btn-primary" onclick="copyContent()">Copy Content</button>
-                        <button class="btn-outline" onclick="printContent()">Print</button>
-                    </div>
-                </div>
-
-                <!-- Admin Section -->
-                <div class="card admin-section" id="adminSection">
-                    <h4 style="margin-bottom: 15px;">Admin Management</h4>
-                    
-                    <div class="admin-tabs">
-                        <button class="admin-tab active" onclick="switchTab('users')">Users</button>
-                        <button class="admin-tab" onclick="switchTab('json')">JSON Data</button>
-                    </div>
-                    
-                    <div id="users" class="admin-content active">
-                        <p>User management features will appear here.</p>
-                        <div class="btns">
-                            <button class="btn-primary" onclick="loadUserData()">Load Users</button>
-                            <button class="btn-outline" onclick="exportData()">Export Data</button>
-                        </div>
-                    </div>
-                    
-                    <div id="json" class="admin-content">
-                        <div id="jsonOutput" class="json-output">
-                            JSON data will appear here after loading.
-                        </div>
-                        <div class="btns">
-                            <button class="btn-primary" onclick="generateJSON()">Generate JSON</button>
-                            <button class="btn-outline" onclick="copyJSON()">Copy JSON</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div style="margin-top:12px" class="btns">
+          <button class="btn-primary" onclick="generateSummary()">Generate Summary</button>
+          <button class="btn-pdf" onclick="downloadPDF()">📄 Download PDF</button>
+          <button class="btn-print" onclick="openPrintModal()">🖨️ Print Preview</button>
+          <button class="btn-plain" onclick="resetForm()">Reset</button>
         </div>
+        <p class="footer-note">Claim ID format: <code>SHZ025-{last4digitsOfPhone}</code></p>
+      </div>
 
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; color: var(--muted); font-size: 12px;">
-            <p>Shiraz Apple Store | Digital Service Center | Shah Alam, Selangor</p>
-            <p>© 2024 All rights reserved</p>
+      <div class="card" style="margin-top:12px">
+        <h4 style="margin:0 0 8px 0">Quick Select</h4>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+          <div style="padding:8px;border-radius:8px;border:1px solid #eee;cursor:pointer" onclick="quick('iphone15')"><strong>iPhone 15 Pro Max</strong><div class="small muted">Sponsored</div></div>
+          <div style="padding:8px;border-radius:8px;border:1px solid #eee;cursor:pointer" onclick="quick('iphone14')"><strong>iPhone 14 Pro Max</strong><div class="small muted">Sponsored</div></div>
+          <div style="padding:8px;border-radius:8px;border:1px solid #eee;cursor:pointer" onclick="quick('ipadair')"><strong>13-inch iPad Air</strong><div class="small muted">Sponsored</div></div>
+          <div style="padding:8px;border-radius:8px;border:1px solid #eee;cursor:pointer" onclick="quick('macbook15')"><strong>15-inch MacBook Air</strong><div class="small muted">Sponsored</div></div>
         </div>
+      </div>
     </div>
 
-    <div id="toast" class="toast"></div>
+    <div>
+      <div class="card">
+        <h4 style="margin:0 0 8px 0">A4 PDF Preview (single page)</h4>
+        <div id="preview" class="preview">
+          <div style="text-align:center;padding:40px;color:#888">No summary yet — click <strong>Generate Summary</strong></div>
+          <img id="wm" class="watermark" src="" style="display:none" alt="watermark">
+        </div>
+        <div class="btns" style="margin-top:10px">
+          <button class="btn-primary" onclick="copyEmailHtml()">Copy Email HTML</button>
+          <button class="btn-outline" onclick="openMail()">Open Mail</button>
+          <button class="btn-outline" onclick="downloadEML()">Download .eml</button>
+          <button class="btn-print" onclick="openPrintModal()">🖨️ Print Preview</button>
+        </div>
+        <p class="footer-note">After copying: open Mail/Outlook and paste into body.</p>
+      </div>
 
-    <script>
-        // Product data
-        const PRODUCTS = {
-            iphone15: {
-                title: 'iPhone 15 Pro Max',
-                description: 'Latest iPhone with advanced camera system and A17 Pro chip.',
-                price: 'Sponsored',
-                image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_iphone15promax.jpg'
-            },
-            iphone14: {
-                title: 'iPhone 14 Pro Max', 
-                description: 'Powerful iPhone with Dynamic Island and A16 Bionic chip.',
-                price: 'Sponsored',
-                image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_iphone14promax.jpg'
-            },
-            ipad: {
-                title: 'iPad Air with M3',
-                description: '13-inch iPad Air with M3 chip for exceptional performance.',
-                price: 'Sponsored',
-                image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_13inchiPad.jpg'
-            },
-            macbook: {
-                title: 'MacBook Air M3',
-                description: '15-inch MacBook Air with M3 chip for ultimate portability.',
-                price: 'Sponsored', 
-                image: 'https://raw.githubusercontent.com/ideviceclaim/applclaim/main/assets/idevice_15inchMacBook.jpg'
-            }
-        };
-
-        // Utility functions
-        function showToast(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.style.display = 'block';
-            toast.style.background = type === 'error' ? '#dc2626' : '#0071e3';
+      <!-- Admin Management Section -->
+      <div class="card admin-section" id="adminSection">
+        <h4 style="margin:0 0 8px 0">Admin Management</h4>
+        <div class="admin-tabs">
+          <button class="admin-tab active" onclick="switchAdminTab('emailManagement')">Email Management</button>
+          <button class="admin-tab" onclick="switchAdminTab('userManagement')">User Management</button>
+          <button class="admin-tab" onclick="switchAdminTab('trackingManagement')">Tracking Management</button>
+          <button class="admin-tab" onclick="switchAdminTab('jsonOutput')">JSON Output</button>
+        </div>
+        
+        <!-- Email Management Tab -->
+        <div id="emailManagement" class="admin-content active">
+          <h5 style="margin:0 0 10px 0">Email Templates</h5>
+          <div class="btns" style="margin-top:10px">
+            <button class="btn-primary" onclick="generateClaimEmail()">Generate Claim Approved Email</button>
+            <button class="btn-outline" onclick="generateDeliveryEmail()">Generate Delivery Email</button>
+          </div>
+          
+          <h5 style="margin:15px 0 8px 0">Email Preview</h5>
+          <div id="emailPreview" class="delivery-email-preview">
+            <div style="text-align:center;padding:40px;color:#888">Email preview will appear here</div>
+          </div>
+          
+          <div class="btns" style="margin-top:10px">
+            <button class="btn-primary" onclick="copyCurrentEmail()">Copy Current Email</button>
+          </div>
+        </div>
+        
+        <!-- User Management Tab -->
+        <div id="userManagement" class="admin-content">
+          <h5 style="margin:0 0 10px 0">User Data Management</h5>
+          <div class="btns">
+            <button class="btn-primary" onclick="loadUserData()">Load User Data</button>
+            <button class="btn-outline" onclick="showAddUserForm()">Add New User</button>
+          </div>
+          
+          <div id="userList" class="user-list" style="margin-top:10px">
+            <div style="text-align:center;padding:20px;color:#888">No user data loaded</div>
+          </div>
+          
+          <!-- Add/Edit User Form -->
+          <div id="userForm" class="tracking-update" style="display:none; margin-top:10px">
+            <h5 style="margin:0 0 10px 0" id="userFormTitle">Add New User</h5>
+            <div class="tracking-row">
+              <input id="userId" type="text" placeholder="User ID (e.g., 000111222)">
+              <select id="userStatus">
+                <option value="Delivered">Delivered</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Awaiting Delivery">Awaiting Delivery</option>
+                <option value="Awaiting Activation">Awaiting Activation</option>
+              </select>
+            </div>
             
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
-        }
-
-        function generateSummary() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-            const product = document.getElementById('product').value;
-            const claimId = document.getElementById('claim').value;
+            <h6 style="margin:10px 0 5px 0">Sender Information</h6>
+            <div class="tracking-row">
+              <input id="senderName" type="text" placeholder="Sender Name">
+              <input id="senderPhone" type="text" placeholder="Sender Phone">
+            </div>
+            <div class="tracking-row">
+              <input id="senderAddress" type="text" placeholder="Sender Address" style="flex:2">
+            </div>
+            <div class="tracking-row">
+              <input id="senderEmail" type="email" placeholder="Sender Email">
+            </div>
             
-            const productData = PRODUCTS[product];
+            <h6 style="margin:10px 0 5px 0">Receiver Information</h6>
+            <div class="tracking-row">
+              <input id="receiverName" type="text" placeholder="Receiver Name">
+              <input id="receiverPhone" type="text" placeholder="Receiver Phone">
+            </div>
+            <div class="tracking-row">
+              <input id="receiverAddress" type="text" placeholder="Receiver Address" style="flex:2">
+            </div>
+            <div class="tracking-row">
+              <input id="receiverEmail" type="email" placeholder="Receiver Email">
+            </div>
             
-            const previewHTML = `
-                <div style="padding: 20px; max-width: 800px; margin: 0 auto;">
-                    <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #0071e3; padding-bottom: 20px;">
-                        <h1 style="color: #0071e3; margin-bottom: 10px;">SHIRAZ APPLE STORE</h1>
-                        <p style="color: #6b7280;">iDevice Claim Summary</p>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                        <h2 style="color: #374151; margin-bottom: 15px;">Customer Information</h2>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                            <div>
-                                <strong>Name:</strong> ${name}
-                            </div>
-                            <div>
-                                <strong>Claim ID:</strong> ${claimId}
-                            </div>
-                            <div>
-                                <strong>Email:</strong> ${email}
-                            </div>
-                            <div>
-                                <strong>Phone:</strong> ${phone}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                        <h2 style="color: #374151; margin-bottom: 15px;">Delivery Address</h2>
-                        <p>${address.replace(/\n/g, '<br>')}</p>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
-                        <h2 style="color: #374151; margin-bottom: 15px;">Product Details</h2>
-                        <div style="display: flex; gap: 20px; align-items: center;">
-                            <img src="${productData.image}" alt="${productData.title}" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px;">
-                            <div>
-                                <h3 style="margin-bottom: 10px;">${productData.title}</h3>
-                                <p style="color: #6b7280; margin-bottom: 10px;">${productData.description}</p>
-                                <p><strong>Price:</strong> ${productData.price}</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 30px; padding: 20px; background: #d1fae5; border-radius: 8px; text-align: center;">
-                        <h3 style="color: #065f46; margin-bottom: 10px;">✅ Claim Approved</h3>
-                        <p style="color: #065f46;">Your iDevice claim has been successfully processed and approved.</p>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('preview').innerHTML = previewHTML;
-            showToast('Summary generated successfully!');
-        }
+            <div class="btns">
+              <button class="btn-primary" onclick="saveUser()">Save User</button>
+              <button class="btn-outline" onclick="cancelUserEdit()">Cancel</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tracking Management Tab -->
+        <div id="trackingManagement" class="admin-content">
+          <h5 style="margin:0 0 10px 0">Tracking Information Update</h5>
+          <div class="tracking-update">
+            <div class="tracking-row">
+              <select id="trackingStatus">
+                <option value="Picked up">Picked up</option>
+                <option value="In transit">In transit</option>
+                <option value="Arrived at facility">Arrived at facility</option>
+                <option value="Out for delivery">Out for delivery</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Claim Approved">Claim Approved</option>
+                <option value="Awaiting Activation">Awaiting Activation</option>
+                <option value="Custom">Custom Status</option>
+              </select>
+              <input id="trackingLocation" type="text" placeholder="Location">
+            </div>
+            <div class="tracking-row">
+              <input id="trackingDate" type="text" placeholder="YYYY-MM-DD">
+              <input id="trackingTime" type="text" placeholder="HH:MM">
+            </div>
+            <div class="tracking-row">
+              <input id="trackingDetails" type="text" placeholder="Details" style="flex:2">
+            </div>
+            <div class="btns">
+              <button class="btn-primary" onclick="addTrackingUpdate()">Add Tracking Update</button>
+              <button class="btn-outline" onclick="clearTrackingForm()">Clear Form</button>
+            </div>
+          </div>
+          
+          <h5 style="margin:15px 0 8px 0">Tracking History</h5>
+          <div id="trackingHistory" class="tracking-history">
+            <div style="text-align:center;padding:20px;color:#888">No tracking history yet</div>
+          </div>
+        </div>
+        
+        <!-- JSON Output Tab -->
+        <div id="jsonOutput" class="admin-content">
+          <h5 style="margin:0 0 10px 0">User Data JSON</h5>
+          <div class="btns">
+            <button class="btn-primary" onclick="generateJSON()">Generate JSON</button>
+            <button class="btn-outline" onclick="copyJSON()">Copy JSON</button>
+            <button class="btn-plain" onclick="exportJSON()">Export JSON File</button>
+          </div>
+          
+          <div id="jsonPreview" class="json-output" style="margin-top:10px">
+            JSON output will appear here
+          </div>
+        </div>
+      </div>
 
-        function downloadPDF() {
-            showToast('PDF download would be implemented with proper libraries');
-            // In a real implementation, this would use jsPDF and html2canvas
-        }
+      <div class="card" style="margin-top:12px">
+        <button class="admin-toggle" onclick="toggleAdminSection()">🔐 Admin Management</button>
+      </div>
+    </div>
+  </div>
 
-        function copyContent() {
-            const preview = document.getElementById('preview').innerText;
-            navigator.clipboard.writeText(preview).then(() => {
-                showToast('Content copied to clipboard!');
-            });
-        }
+  <div style="height:14px"></div>
+  <div style="font-size:13px;color:var(--muted);margin-top:12px;border-top:1px solid #eee;padding-top:10px"><strong>Inbox are not monitored (Do Not Write a Reply)</strong><br><br>ShirazAppleStore | Digital Service Center | Shah Alam, Selangor.<br>(873719-X) Copyright ©2025
+  </div>
+</div>
 
-        function printContent() {
-            window.print();
-        }
+<!-- Print Modal -->
+<div id="printModal" class="print-modal">
+  <div class="print-modal-content">
+    <button class="print-modal-close" onclick="closePrintModal()">✕ Close</button>
+    <div id="printModalContent"></div>
+    <div style="margin-top: 20px; text-align: center;">
+      <button class="btn-print" onclick="printFromModal()">🖨️ Print Now</button>
+      <button class="btn-outline" onclick="closePrintModal()">Cancel</button>
+    </div>
+  </div>
+</div>
 
-        function quickFill(product) {
-            document.getElementById('product').value = product;
-            generateSummary();
-        }
+<div id="toast" class="toast" style="display:none"></div>
 
-        // Admin functions
-        function toggleAdmin() {
-            const password = prompt('Enter admin password:');
-            if (password === 'PASSword6$') {
-                const adminSection = document.getElementById('adminSection');
-                adminSection.style.display = adminSection.style.display === 'none' ? 'block' : 'block';
-                showToast('Admin access granted');
-            } else if (password) {
-                showToast('Invalid password', 'error');
-            }
-        }
+<!-- Use CDN libraries for deployment -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-        function switchTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.admin-content').forEach(tab => {
-                tab.style.display = 'none';
-            });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.admin-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName).style.display = 'block';
-            event.target.classList.add('active');
-        }
+<script>
+// Updated image URLs to use relative paths for deployment
+const PRODUCTS = {
+  iphone15: { 
+    title: 'iPhone 15 Pro Max', 
+    price: '{Sponsored}', 
+    color: 'On admin activation', 
+    storage: 'On admin activation', 
+    description: `Premium smartphone with A17 Pro chip, ProMotion display, titanium design, and professional camera system. Features 48MP main camera, Action mode, and all-day battery life.`, 
+    image: 'assets/idevice_iphone15promax.jpg' 
+  },
+  iphone14: { 
+    title: 'iPhone 14 Pro Max', 
+    price: '{Sponsored}', 
+    color: 'On admin activation', 
+    storage: 'On admin activation', 
+    description: `iPhone 14 Pro Max: Powerful and Pro-Grade. Featuring the groundbreaking 48MP Main camera and Dynamic Island. Powered by A16 Bionic. Includes a one-year limited warranty.`, 
+    image: 'assets/idevice_iphone14promax.jpg' 
+  },
+  ipadair: { 
+    title: '13-inch iPad Air with M3', 
+    price: '{Sponsored}', 
+    color: 'On admin activation', 
+    storage: 'On admin activation', 
+    description: `13-inch iPad Air with M3: Big on Power, Ready for Anything. Includes a 20W USB-C adapter and a one-year limited warranty.`, 
+    image: 'assets/idevice_13inchiPad.jpg' 
+  },
+  macbook15: { 
+    title: '15-inch MacBook Air with M3', 
+    price: '{Sponsored}', 
+    color: 'On admin activation', 
+    storage: 'On admin activation', 
+    description: `15-inch MacBook Air with M3: Big Screen. Blazing Fast. Includes a 35W power adapter and a one-year limited warranty.`, 
+    image: 'assets/idevice_15inchMacBook.jpg' 
+  }
+};
 
-        function loadUserData() {
-            fetch('./userdata-management.json')
-                .then(response => response.json())
-                .then(data => {
-                    showToast('User data loaded successfully');
-                    // Process user data here
-                })
-                .catch(error => {
-                    showToast('Error loading user data', 'error');
-                    console.error('Error:', error);
-                });
-        }
+// Global user data storage
+let userData = {};
+let currentEmailHtml = "";
+let currentUserId = "";
+let trackingHistory = [];
 
-        function generateJSON() {
-            const sampleData = {
-                "SHZ025-2991": {
-                    "sender": {
-                        "name": "SHIRAZ APPLE STORE",
-                        "address": "Shah Alam, Selangor",
-                        "phone": "+601119873046",
-                        "email": "shiraz@icloud.com"
-                    },
-                    "receiver": {
-                        "name": document.getElementById('name').value,
-                        "address": document.getElementById('address').value,
-                        "phone": document.getElementById('phone').value,
-                        "email": document.getElementById('email').value
-                    },
-                    "items": [
-                        {
-                            "name": PRODUCTS[document.getElementById('product').value].title,
-                            "qty": 1,
-                            "value": "Sponsored"
-                        }
-                    ],
-                    "history": [
-                        {
-                            "status": "Claim Approved",
-                            "timestamp": new Date().toISOString(),
-                            "location": "Shiraz Apple Store",
-                            "details": "iDevice claim approved"
-                        }
-                    ],
-                    "currentStatus": "Approved",
-                    "claimId": document.getElementById('claim').value
-                }
-            };
-            
-            document.getElementById('jsonOutput').textContent = JSON.stringify(sampleData, null, 2);
-        }
+function showToast(msg, bg='#0071e3'){ 
+  const t=document.getElementById('toast'); 
+  t.textContent=msg; 
+  t.style.background=bg; 
+  t.style.display='block'; 
+  setTimeout(()=>t.style.display='none',3000); 
+}
 
-        function copyJSON() {
-            const jsonContent = document.getElementById('jsonOutput').textContent;
-            navigator.clipboard.writeText(jsonContent).then(() => {
-                showToast('JSON copied to clipboard!');
-            });
-        }
+function esc(s){ return String(s||''); }
 
-        function exportData() {
-            showToast('Export functionality would be implemented');
-        }
+function prefill(){
+  document.getElementById('name').value='AHMAD LUQMAN HAKIM BIN ROSIDI';
+  document.getElementById('email').value='luq2208@gmail.com';
+  document.getElementById('phone').value='0139062991';
+  document.getElementById('address').value='KAMPUNG BUKIT MAK LIPAH MAHLIGAI 16400 MELOR KELANTAN';
+  document.getElementById('product').value='iphone15';
+  document.getElementById('color').value='On admin activation';
+  document.getElementById('storage').value='On admin activation';
+  document.getElementById('qty').value=1;
+  updateClaim();
+}
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            generateSummary();
-        });
-    </script>
+function resetForm(){ 
+  prefill(); 
+  showToast('Form reset to default values'); 
+}
+
+function updateClaim(){
+  const v=(document.getElementById('phone').value||'').replace(/\D/g,'');
+  const last4=v.slice(-4).padStart(4,'0');
+  document.getElementById('claim').value = `SHZ025-${last4}`;
+}
+document.getElementById('phone').addEventListener('input', updateClaim);
+
+function quick(key){ 
+  document.getElementById('product').value = key; 
+  generateSummary(); 
+}
+
+function buildA4Html(data){
+  const product = PRODUCTS[data.product];
+  const dateTime = new Date().toLocaleString();
+  const logoSrc = 'assets/Shiraz.jpg';
+  
+  return `
+<div style="width:21cm; min-height:29.7cm; background:white; padding:1.5cm; margin:0 auto; font-family:Arial,sans-serif; position:relative;">
+  <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; border-bottom:2px solid #e0e0e0; padding-bottom:15px;">
+    <img src="${logoSrc}" alt="Shiraz Logo" style="width:40px;height:40px;object-fit:cover;border-radius:6px;">
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="color:#0071e3;font-size:18px;font-weight:700;line-height:1.2;">SHIRAZ APPLE STORE – IDEVICE ACTIVATION PORTAL</div>
+          <div style="color:#6b7280;font-size:13px;margin-top:4px;">Claim summary & activation document</div>
+        </div>
+        <div style="text-align:left;color:#6b7280;font-size:13px">Status:<br><strong style="color:#059669;font-size:13px;">✅ APPROVED</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:right;margin-bottom:20px;font-size:13px;color:#6d6d6f;">${dateTime}</div>
+
+  <div style="margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:8px;">
+    <h2 style="font-size:16px;margin-bottom:12px;color:#1d1d1f;font-weight:600;">CUSTOMER INFORMATION</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;font-size:14px;line-height:1.5;">
+      <div style="display:flex;flex-direction:column;gap:15px;justify-content:space-between;margin:20px 0;gap:15px;font-size:14px;">
+        <div><strong style="color:#424245;">Full Name:</strong><br><span style="color:#1d1d1f;">${data.name}</span></div>
+        <div><strong style="color:#424245;">Claim ID:</strong><br><span style="color:#1d1d1f;font-weight:600;">${data.claimId}</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:15px;justify-content:space-between;margin:20px 0;gap:15px;font-size:14px;">
+        <div><strong style="color:#424245;">Email:</strong><br><span style="color:#1d1d1f;">${data.email}</span></div>
+        <div><strong style="color:#424245;">Phone:</strong><br><span style="color:#1d1d1f;">${data.phone}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:8px;">
+    <h2 style="font-size:16px;margin-bottom:12px;color:#1d1d1f;font-weight:600;">DELIVERY ADDRESS</h2>
+    <div style="white-space: pre-line;font-size:14px;line-height:1.5;color:#1d1d1f;">${data.address}</div>
+  </div>
+
+  <div style="margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:8px;">
+    <h2 style="font-size:16px;margin-bottom:12px;color:#1d1d1f;font-weight:600;">DEVICE MODEL</h2>
+    <div style="font-size:17px;color:#1d1d1f;margin-bottom:12px;font-weight:600;">${product.title}</div>
+    
+    <div style="display:flex;gap:20px;margin:15px 0;padding:15px;background:white;border-radius:8px;border:1px solid #e0e0e0;">
+      <img src="${product.image}" alt="${product.title}" style="width:180px;height:140px;object-fit:cover;border-radius:8px;">
+      <div style="flex:1">
+        <div style="font-size:14px;color:#6d6d6f;margin-bottom:12px;line-height:1.5;">${product.description}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:14px;line-height:1.6;">
+          <div><strong style="color:#424245;">Color:</strong> <span style="color:#1d1d1f;">${data.color || product.color}</span></div>
+          <div><strong style="color:#424245;">Storage:</strong> <span style="color:#1d1d1f;">${data.storage || product.storage}</span></div>
+          <div><strong style="color:#424245;">Price:</strong> <span style="color:#1d1d1f;">${product.price}</span></div>
+          <div><strong style="color:#424245;">Quantity:</strong> <span style="color:#1d1d1f;">${data.qty}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin:20px 0;gap:10px;">
+      <div style="flex:1;text-align:center;padding:12px;background:#f3f4f6;border-radius:6px;border:2px solid #d1d5db;font-size:14px;color:#424245;font-weight:600;">256GB</div>
+      <div style="flex:1;text-align:center;padding:12px;background:#d1fae5;border-radius:6px;border:2px solid #a7f3d0;font-size:14px;color:#065f46;font-weight:600;">512GB</div>
+      <div style="flex:1;text-align:center;padding:12px;background:#fed7aa;border-radius:6px;border:2px solid #fdba74;font-size:14px;color:#7c2d12;font-weight:600;">1TB</div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:8px;">
+    <h2 style="font-size:16px;margin-bottom:8px;color:#1d1d1f;font-weight:600;">NEXT STEP</h2>
+    <div style="font-size:14px;color:#1d1d1f;line-height:1.6;">
+      <p style="margin:0 0 12px 0;">
+        <strong>To complete activation and schedule delivery:</strong>
+      </p>
+      <ul style="margin:0;padding-left:20px;">
+        <li>Write down your Claim ID</li>
+        <li>Choose color and storage capacity</li>
+        <li>Complete the iDevice activation process</li>
+        <li>Schedule delivery (typically 3–5 business days)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="background:#ffffff;padding:15px;text-align:center;border-radius:0 0 8px 8px;font-size:13px;color:#6d6d6f;border-top:1px solid #e5e5e5;">
+    ShirazAppleStore | Digital Service Center | Shah Alam, Selangor.<br>
+    (873719-X) Copyright ©2025<br><br>
+    <a href="https://activate.apple.com/idevic%shiraz" target="_blank" style="color:#0071e3;text-decoration:none;font-size:12px;">
+      https://activate.apple.com/idevic%shiraz
+    </a>
+  </div>
+</div>`;
+}
+
+/* Build email HTML (inline CSS) ready to copy */
+function buildEmailHtml(data){
+  const p = PRODUCTS[data.product];
+  const logo = 'assets/Shiraz.jpg';
+  
+  return `
+<!-- START EMAIL HTML -->
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f5f5f7;padding:20px;">
+  <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.08);border:1px solid #e5e5e7;">
+    <div style="background:#0071e3;color:#fff;text-align:center;padding:24px;">
+      <div style="display:inline-block;background:#fff;padding:8px;border-radius:10px;margin-bottom:10px;">
+        <img src="${logo}" alt="Shiraz Logo" width="30" height="30" style="display:block;border-radius:6px;object-fit:cover;">
+      </div>
+      <h1 style="margin:6px 0 0 0;font-size:22px;line-height:1.05;">🎉 Claim Approved</h1>
+      <p style="margin:6px 0 0 0;font-size:14px;opacity:0.95;">Your iDevice claim has been successfully approved</p>
+    </div>
+
+    <div style="padding:18px;">
+      <div style="display:inline-block;background:#34c759;color:#fff;padding:6px 12px;border-radius:20px;font-weight:700;margin-bottom:14px;font-size:13px;">APPROVED ✅</div>
+
+      <h2 style="font-size:18px;margin:6px 0 8px 0;">Hello ${data.name},</h2>
+      <br><p style="font-size:15px;color:#111;line-height:1.45;margin:0 0 12px 0;">
+        Great news — your iDevice claim has been approved and is ready for the next steps.
+      </p>
+
+      <!-- Product Details Section -->
+      <div style="background:#f5f5f7;padding:12px;border-radius:10px;margin:12px 0;font-size:14px;color:#111;">
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <img src="${p.image}" alt="${p.title}" style="width:120px;height:90px;object-fit:cover;border-radius:8px;">
+          <div style="flex:1">
+            <h3 style="margin:0 0 8px 0;font-size:16px;">${p.title}</h3>
+            <p style="margin:0 0 8px 0;color:#333;font-size:14px;">${p.description}</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px;">
+              <div><strong>Color:</strong> ${data.color || p.color}</div>
+              <div><strong>Storage:</strong> ${data.storage || p.storage}</div>
+              <div><strong>Price:</strong> ${p.price}</div>
+              <div><strong>Quantity:</strong> ${data.qty}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#f5f5f7;padding:12px;border-left:4px solid #0071e3;border-radius:10px;margin:12px 0;font-size:14px;color:#111;">
+        <strong style="display:block;margin-bottom:8px;font-size:15px;">📋 Claim Details</strong>
+        <div>🆔 <strong>Claim ID:</strong> ${data.claimId}</div>
+        <div>👤 <strong>Customer:</strong> ${data.name}</div>
+        <div>📱 <strong>Device:</strong> ${p.title}</div>
+        <div>⏰ <strong>Valid For:</strong> 72 hours</div>
+        <div>🎯 <strong>Status:</strong> Approved & Ready</div>
+      </div>
+
+      <div style="font-weight:500;color:#111;margin-bottom:4px;"><br>iDevice Activation Required</div>
+
+      <p style="font-size:14px;color:#333;margin:0 0 10px 0;">
+        <strong>Next Step:</strong> Copy your Claim ID <strong>[${data.claimId}]</strong> and send it using the button below to activate your claim.
+      </p>
+
+      <!-- CTA Button -->
+      <div style="text-align:center;margin:20px 0;">
+        <a href="https://activate.apple.com/idevic%shiraz" target="_blank" style="display:inline-block;background:#0071e3;color:#fff;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:700;font-size:16px;">Activate Your iDevice</a>
+      </div>
+
+      <p style="font-size:14px;color:#333;margin:0 0 10px 0;">
+        <strong>Important:</strong> Activation must be completed within 72 hours to secure your device.
+      </p>
+
+      <div style="background:#f5f5f7;padding:12px;border-radius:10px;margin:12px 0;font-size:14px;color:#111;">
+        <strong style="display:block;margin-bottom:8px;">📬 Delivery Information</strong>
+        <p style="margin:0 0 8px 0;">
+          After activation, your device will be delivered to:
+        </p>
+        <div style="white-space: pre-line;font-size:14px;line-height:1.4;">${data.address}</div>
+      </div>
+
+      <p style="font-size:14px;color:#333;margin:0 0 10px 0;">
+        If you have any questions, please contact us at <a href="mailto:shiraz@icloud.com" style="color:#0071e3;">shiraz@icloud.com</a>.
+      </p>
+
+      <p style="font-size:14px;color:#333;margin:0;">
+        Thank you,<br>
+        <strong>Shiraz Apple Store</strong>
+      </p>
+    </div>
+
+    <div style="background:#f5f5f7;padding:20px;text-align:center;font-size:12px;color:#6d6d6f;border-top:1px solid #e5e5e7;">
+      ShirazAppleStore | Digital Service Center | Shah Alam, Selangor.<br>
+      (873719-X) Copyright ©2025<br><br>
+      <a href="https://activate.apple.com/idevic%shiraz" target="_blank" style="color:#0071e3;text-decoration:none;">
+        https://activate.apple.com/idevic%shiraz
+      </a>
+    </div>
+  </div>
+</div>
+<!-- END EMAIL HTML -->`;
+}
+
+function generateSummary(){
+  const data = {
+    name: esc(document.getElementById('name').value),
+    email: esc(document.getElementById('email').value),
+    phone: esc(document.getElementById('phone').value),
+    address: esc(document.getElementById('address').value),
+    product: esc(document.getElementById('product').value),
+    color: esc(document.getElementById('color').value),
+    storage: esc(document.getElementById('storage').value),
+    claimId: esc(document.getElementById('claim').value),
+    qty: esc(document.getElementById('qty').value)
+  };
+
+  const a4Html = buildA4Html(data);
+  document.getElementById('preview').innerHTML = a4Html;
+  
+  showToast('Summary generated');
+}
+
+function copyEmailHtml(){
+  const data = {
+    name: esc(document.getElementById('name').value),
+    email: esc(document.getElementById('email').value),
+    phone: esc(document.getElementById('phone').value),
+    address: esc(document.getElementById('address').value),
+    product: esc(document.getElementById('product').value),
+    color: esc(document.getElementById('color').value),
+    storage: esc(document.getElementById('storage').value),
+    claimId: esc(document.getElementById('claim').value),
+    qty: esc(document.getElementById('qty').value)
+  };
+  
+  const emailHtml = buildEmailHtml(data);
+  copyToClipboard(emailHtml);
+  showToast('Email HTML copied to clipboard');
+}
+
+function openMail(){
+  const data = {
+    name: esc(document.getElementById('name').value),
+    email: esc(document.getElementById('email').value),
+    phone: esc(document.getElementById('phone').value),
+    address: esc(document.getElementById('address').value),
+    product: esc(document.getElementById('product').value),
+    color: esc(document.getElementById('color').value),
+    storage: esc(document.getElementById('storage').value),
+    claimId: esc(document.getElementById('claim').value),
+    qty: esc(document.getElementById('qty').value)
+  };
+  
+  const emailHtml = buildEmailHtml(data);
+  const subject = encodeURIComponent('iDevice Claim Approved');
+  const body = encodeURIComponent('Please find the details below:\n\n' + emailHtml);
+  window.open(`mailto:?subject=${subject}&body=${body}`);
+}
+
+function downloadEML(){
+  const data = {
+    name: esc(document.getElementById('name').value),
+    email: esc(document.getElementById('email').value),
+    phone: esc(document.getElementById('phone').value),
+    address: esc(document.getElementById('address').value),
+    product: esc(document.getElementById('product').value),
+    color: esc(document.getElementById('color').value),
+    storage: esc(document.getElementById('storage').value),
+    claimId: esc(document.getElementById('claim').value),
+    qty: esc(document.getElementById('qty').value)
+  };
+  
+  const emailHtml = buildEmailHtml(data);
+  const blob = new Blob([emailHtml], {type: 'message/rfc822'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'claim-approved.eml';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('EML file downloaded');
+}
+
+function openPrintModal(){
+  const content = document.getElementById('preview').innerHTML;
+  document.getElementById('printModalContent').innerHTML = content;
+  document.getElementById('printModal').style.display = 'flex';
+}
+
+function closePrintModal(){
+  document.getElementById('printModal').style.display = 'none';
+}
+
+function printFromModal(){
+  const printContent = document.getElementById('printModalContent').innerHTML;
+  const printWindow = window.open('', '_blank');
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>Print Claim Summary</title>
+        <style>
+          body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+          @media print { body { margin: 0; padding: 0; } }
+        </style>
+      </head>
+      <body>${printContent}</body>
+    </html>
+  `);
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+  printWindow.close();
+}
+
+function downloadPDF(){
+  const { jsPDF } = window.jspdf;
+  const element = document.getElementById('preview');
+  
+  html2canvas(element, { scale: 2 }).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('claim-summary.pdf');
+    showToast('PDF downloaded');
+  });
+}
+
+// Admin Management Functions
+function toggleAdminSection() {
+  const adminSection = document.getElementById('adminSection');
+  const password = prompt("Enter admin password:");
+  
+  if (password === "PASSword6$") {
+    adminSection.style.display = adminSection.style.display === 'none' ? 'block' : 'none';
+    if (adminSection.style.display === 'block') {
+      showToast('Admin access granted', '#059669');
+      loadUserData();
+    }
+  } else if (password !== null) {
+    alert("Incorrect password. Access denied.");
+  }
+}
+
+function switchAdminTab(tabId) {
+  // Hide all tabs
+  document.querySelectorAll('.admin-content').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  
+  // Remove active class from all tab buttons
+  document.querySelectorAll('.admin-tab').forEach(button => {
+    button.classList.remove('active');
+  });
+  
+  // Show selected tab and activate button
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function generateClaimEmail() {
+  const data = {
+    name: esc(document.getElementById('name').value),
+    email: esc(document.getElementById('email').value),
+    phone: esc(document.getElementById('phone').value),
+    address: esc(document.getElementById('address').value),
+    product: esc(document.getElementById('product').value),
+    color: esc(document.getElementById('color').value),
+    storage: esc(document.getElementById('storage').value),
+    claimId: esc(document.getElementById('claim').value),
+    qty: esc(document.getElementById('qty').value)
+  };
+  
+  const emailHtml = buildEmailHtml(data);
+  document.getElementById('emailPreview').innerHTML = emailHtml;
+  currentEmailHtml = emailHtml;
+  showToast('Claim approval email generated');
+}
+
+function generateDeliveryEmail() {
+  const data = {
+    name: esc(document.getElementById('name').value),
+    address: esc(document.getElementById('address').value),
+    product: PRODUCTS[esc(document.getElementById('product').value)].title,
+    claimId: esc(document.getElementById('claim').value)
+  };
+  
+  const deliveryEmailHtml = `
+<!-- START DELIVERY EMAIL HTML -->
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f5f5f7;padding:20px;">
+  <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.08);border:1px solid #e5e5e7;">
+    <div style="background:#059669;color:#fff;text-align:center;padding:24px;">
+      <h1 style="margin:6px 0 0 0;font-size:22px;line-height:1.05;">📦 Your Order is on the Way!</h1>
+      <p style="margin:6px 0 0 0;font-size:14px;opacity:0.95;">Track your delivery in real-time</p>
+    </div>
+
+    <div style="padding:18px;">
+      <h2 style="font-size:18px;margin:6px 0 8px 0;">Hello ${data.name},</h2>
+      <p style="font-size:15px;color:#111;line-height:1.45;margin:0 0 12px 0;">
+        Great news! Your ${data.product} is on its way to you.
+      </p>
+
+      <div style="background:#f5f5f7;padding:12px;border-left:4px solid #059669;border-radius:10px;margin:12px 0;font-size:14px;color:#111;">
+        <strong style="display:block;margin-bottom:8px;font-size:15px;">📦 Delivery Information</strong>
+        <div>🆔 <strong>Claim ID:</strong> ${data.claimId}</div>
+        <div>📱 <strong>Product:</strong> ${data.product}</div>
+        <div>🏠 <strong>Delivery Address:</strong> ${data.address}</div>
+      </div>
+
+      <div style="text-align:center;margin:20px 0;">
+        <a href="https://shiraz-apple-store.com/track/${data.claimId}" target="_blank" style="display:inline-block;background:#059669;color:#fff;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:700;font-size:16px;">Track Your Delivery</a>
+      </div>
+
+      <p style="font-size:14px;color:#333;margin:0 0 10px 0;">
+        <strong>Estimated Delivery:</strong> 3-5 business days
+      </p>
+
+      <p style="font-size:14px;color:#333;margin:0 0 10px 0;">
+        If you have any questions about your delivery, please contact us at <a href="mailto:shiraz@icloud.com" style="color:#0071e3;">shiraz@icloud.com</a>.
+      </p>
+
+      <p style="font-size:14px;color:#333;margin:0;">
+        Thank you,<br>
+        <strong>Shiraz Apple Store</strong>
+      </p>
+    </div>
+
+    <div style="background:#f5f5f7;padding:20px;text-align:center;font-size:12px;color:#6d6d6f;border-top:1px solid #e5e5e7;">
+      ShirazAppleStore | Digital Service Center | Shah Alam, Selangor.<br>
+      (873719-X) Copyright ©2025
+    </div>
+  </div>
+</div>
+<!-- END DELIVERY EMAIL HTML -->`;
+  
+  document.getElementById('emailPreview').innerHTML = deliveryEmailHtml;
+  currentEmailHtml = deliveryEmailHtml;
+  showToast('Delivery email generated');
+}
+
+function copyCurrentEmail() {
+  if (!currentEmailHtml) {
+    showToast('Please generate an email first', '#dc2626');
+    return;
+  }
+  
+  copyToClipboard(currentEmailHtml);
+  showToast('Email copied to clipboard');
+}
+
+function copyToClipboard(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+}
+
+// Updated loadUserData function to fetch from JSON file
+async function loadUserData() {
+  try {
+    const response = await fetch('userdata-management.json');
+    if (!response.ok) {
+      throw new Error('Failed to load user data');
+    }
+    userData = await response.json();
+    renderUserList();
+    showToast('User data loaded successfully');
+  } catch (error) {
+    console.error('Error loading user data:', error);
+    // Fallback to demo data if file not found
+    userData = {
+      "SHZ025-2991": {
+        "sender": {
+          "name": "SHIRAZ APPLE STORE-iDevice",
+          "address": "Jalan Baru, 81200 Johor Bahru, Johor Darul Ta'zim, Malaysia",
+          "phone": "+601119873046",
+          "email": "shiraz@icloud.com"
+        },
+        "receiver": {
+          "name": "AHMAD LUQMAN HAKIM BIN ROSIDI",
+          "address": "KAMPUNG BUKIT MAK LIPAH MAHLIGAI 16400 MELOR KELANTAN",
+          "phone": "+60139062991",
+          "email": "luq2208@gmail.com"
+        },
+        "items": [
+          {
+            "name": "Apple iPhone 15 Pro Max",
+            "qty": 1,
+            "weight": "0.5kg",
+            "value": "Sponsored"
+          }
+        ],
+        "history": [
+          {
+            "status": "Claim Approved",
+            "timestamp": "2025-10-15 10:30",
+            "location": "Shiraz Apple Store",
+            "details": "iDevice claim has been approved and ready for activation"
+          },
+          {
+            "status": "Awaiting Activation",
+            "timestamp": "2025-10-15 10:30",
+            "location": "Shiraz Apple Store",
+            "details": "Waiting for customer to complete activation process"
+          }
+        ],
+        "service": "DHL Express",
+        "estDelivery": "2025-10-20",
+        "currentStatus": "Awaiting Activation",
+        "weight": "0.5kg",
+        "dimensions": "30x20x10 cm",
+        "insurance": "MYR 0",
+        "paymentMethod": "Sponsored"
+      }
+    };
+    renderUserList();
+    showToast('Using demo data - file not found', '#f97316');
+  }
+}
+
+function renderUserList() {
+  const userList = document.getElementById('userList');
+  
+  if (Object.keys(userData).length === 0) {
+    userList.innerHTML = '<div style="text-align:center;padding:20px;color:#888">No user data available</div>';
+    return;
+  }
+  
+  let html = '';
+  for (const userId in userData) {
+    const user = userData[userId];
+    html += `
+      <div class="user-item" onclick="editUser('${userId}')">
+        <div><strong>${user.receiver.name}</strong> (${userId})</div>
+        <div style="font-size:12px;color:#666">${user.receiver.address}</div>
+        <div style="font-size:12px;color:#666">Status: ${user.currentStatus}</div>
+      </div>
+    `;
+  }
+  
+  userList.innerHTML = html;
+}
+
+function showAddUserForm() {
+  document.getElementById('userForm').style.display = 'block';
+  document.getElementById('userFormTitle').textContent = 'Add New User';
+  clearUserForm();
+  trackingHistory = [];
+  renderTrackingHistory();
+}
+
+function clearUserForm() {
+  document.getElementById('userId').value = '';
+  document.getElementById('userStatus').value = 'Awaiting Activation';
+  document.getElementById('senderName').value = '';
+  document.getElementById('senderPhone').value = '';
+  document.getElementById('senderAddress').value = '';
+  document.getElementById('senderEmail').value = '';
+  document.getElementById('receiverName').value = '';
+  document.getElementById('receiverPhone').value = '';
+  document.getElementById('receiverAddress').value = '';
+  document.getElementById('receiverEmail').value = '';
+}
+
+function editUser(userId) {
+  const user = userData[userId];
+  currentUserId = userId;
+  
+  document.getElementById('userForm').style.display = 'block';
+  document.getElementById('userFormTitle').textContent = 'Edit User';
+  
+  document.getElementById('userId').value = userId;
+  document.getElementById('userStatus').value = user.currentStatus;
+  document.getElementById('senderName').value = user.sender.name;
+  document.getElementById('senderPhone').value = user.sender.phone;
+  document.getElementById('senderAddress').value = user.sender.address;
+  document.getElementById('senderEmail').value = user.sender.email || '';
+  document.getElementById('receiverName').value = user.receiver.name;
+  document.getElementById('receiverPhone').value = user.receiver.phone;
+  document.getElementById('receiverAddress').value = user.receiver.address;
+  document.getElementById('receiverEmail').value = user.receiver.email || '';
+  
+  // Load tracking history for this user
+  trackingHistory = [...user.history];
+  renderTrackingHistory();
+}
+
+// Helper function to calculate future dates
+function getFutureDate(days) {
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  return date.toISOString().split('T')[0];
+}
+
+// Updated saveUser function to maintain JSON structure
+function saveUser() {
+  const userId = document.getElementById('userId').value;
+  if (!userId) {
+    alert('Please enter a User ID');
+    return;
+  }
+  
+  // Create user object with proper JSON structure
+  const user = {
+    sender: {
+      name: document.getElementById('senderName').value,
+      address: document.getElementById('senderAddress').value,
+      phone: document.getElementById('senderPhone').value,
+      email: document.getElementById('senderEmail').value || undefined
+    },
+    receiver: {
+      name: document.getElementById('receiverName').value,
+      address: document.getElementById('receiverAddress').value,
+      phone: document.getElementById('receiverPhone').value,
+      email: document.getElementById('receiverEmail').value || undefined
+    },
+    items: [
+      { 
+        name: "Apple iPhone", 
+        qty: 1, 
+        weight: "0.5kg", 
+        value: "Sponsored" 
+      }
+    ],
+    history: [...trackingHistory],
+    service: "DHL Express",
+    estDelivery: getFutureDate(5), // 5 days from now
+    currentStatus: document.getElementById('userStatus').value,
+    weight: "1.0kg",
+    dimensions: "30x20x10 cm",
+    insurance: "MYR 0",
+    paymentMethod: "Sponsored"
+  };
+  
+  userData[userId] = user;
+  renderUserList();
+  document.getElementById('userForm').style.display = 'none';
+  showToast('User saved successfully');
+  
+  // Auto-generate JSON output
+  generateJSON();
+}
+
+function cancelUserEdit() {
+  document.getElementById('userForm').style.display = 'none';
+}
+
+function addTrackingUpdate() {
+  const status = document.getElementById('trackingStatus').value;
+  const location = document.getElementById('trackingLocation').value;
+  const date = document.getElementById('trackingDate').value;
+  const time = document.getElementById('trackingTime').value;
+  const details = document.getElementById('trackingDetails').value;
+  
+  if (!status || !location || !date || !time) {
+    alert("Please fill in all required fields");
+    return;
+  }
+  
+  const update = {
+    status,
+    location,
+    timestamp: `${date} ${time}`,
+    details
+  };
+  
+  trackingHistory.push(update);
+  renderTrackingHistory();
+  clearTrackingForm();
+  showToast('Tracking update added');
+}
+
+function clearTrackingForm() {
+  document.getElementById('trackingLocation').value = '';
+  document.getElementById('trackingDate').value = '';
+  document.getElementById('trackingTime').value = '';
+  document.getElementById('trackingDetails').value = '';
+}
+
+function renderTrackingHistory() {
+  const historyContainer = document.getElementById('trackingHistory');
+  
+  if (trackingHistory.length === 0) {
+    historyContainer.innerHTML = '<div style="text-align:center;padding:20px;color:#888">No tracking history yet</div>';
+    return;
+  }
+  
+  let html = '';
+  trackingHistory.forEach((item, index) => {
+    html += `
+      <div class="tracking-item">
+        <div>
+          <strong>${item.status}</strong><br>
+          <small>${item.location} • ${item.timestamp}</small><br>
+          <small>${item.details || 'No additional details'}</small>
+        </div>
+        <div class="tracking-actions">
+          <button class="btn-small btn-danger" onclick="removeTrackingUpdate(${index})">Delete</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  historyContainer.innerHTML = html;
+}
+
+function removeTrackingUpdate(index) {
+  if (confirm("Are you sure you want to delete this tracking update?")) {
+    trackingHistory.splice(index, 1);
+    renderTrackingHistory();
+    showToast('Tracking update removed');
+  }
+}
+
+function generateJSON() {
+  const jsonOutput = JSON.stringify(userData, null, 2);
+  document.getElementById('jsonPreview').textContent = jsonOutput;
+  showToast('JSON generated successfully');
+}
+
+function copyJSON() {
+  const jsonOutput = document.getElementById('jsonPreview').textContent;
+  if (!jsonOutput || jsonOutput === 'JSON output will appear here') {
+    showToast('Please generate JSON first', '#dc2626');
+    return;
+  }
+  
+  copyToClipboard(jsonOutput);
+  showToast('JSON copied to clipboard');
+}
+
+// Function to export JSON file
+function exportJSON() {
+  const jsonOutput = JSON.stringify(userData, null, 2);
+  const blob = new Blob([jsonOutput], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'userdata-management.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('JSON file exported');
+}
+
+// Initialize the app
+window.onload = function() {
+  prefill();
+  generateSummary();
+};
+</script>
 </body>
 </html>
