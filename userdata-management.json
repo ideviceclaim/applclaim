@@ -1,4 +1,201 @@
 {
+  "000111222": {
+    "sender": {
+      "name": "Oluwa Pman",
+      "address": "123 Jalan Tunku, Kuala Lumpur, Malaysia",
+      "phone": "+60123456789",
+      "email": "pman@hacking.com"
+    },
+    "receiver": {
+      "name": "John Smith",
+      "address": "456 Orchard Road, Singapore 238879",
+      "phone": "+6587654321",
+      "email": "your.client@tools.com"
+    },
+    "items": [
+      {
+        "name": "iPhone 17 pro",
+        "qty": 1,
+        "weight": "0.5kg",
+        "value": "MYR 10"
+      },
+      {
+        "name": "Gift Box",
+        "qty": 2,
+        "weight": "1.2kg",
+        "value": "MYR 120"
+      }
+    ],
+    "history": [
+      {
+        "status": "Picked up",
+        "timestamp": "2025-09-25 09:00",
+        "location": "Kuala Lumpur, Malaysia",
+        "details": "Package picked up from sender"
+      },
+      {
+        "status": "In transit",
+        "timestamp": "2025-09-26 14:30",
+        "location": "Kuala Lumpur Hub",
+        "details": "Package processed at sorting facility"
+      },
+      {
+        "status": "Arrived at facility",
+        "timestamp": "2025-09-27 10:15",
+        "location": "Singapore Gateway",
+        "details": "Package arrived at destination country"
+      },
+      {
+        "status": "Out for delivery",
+        "timestamp": "2025-09-28 08:45",
+        "location": "Singapore",
+        "details": "Package is out for delivery"
+      },
+      {
+        "status": "Delivered",
+        "timestamp": "2025-09-28 14:20",
+        "location": "Singapore",
+        "details": "Package delivered to recipient"
+      }
+    ],
+    "service": "DHL Express",
+    "estDelivery": "2025-09-29",
+    "currentStatus": "Delivered",
+    "weight": "1.7kg",
+    "dimensions": "30x20x10 cm",
+    "insurance": "MYR 200",
+    "paymentMethod": "DuitNow"
+  },
+  "7287654321098788": {
+    "sender": {
+      "name": "SHIRAZ APPLE STORE-iDevice",
+      "address": "Jalan Baru, 81200 Johor Bahru, Johor Darul Ta'zim, Malaysia",
+      "phone": "+601119873046"
+    },
+    "receiver": {
+      "name": "MUKHLIS BIN AHMAD",
+      "address": "Hostel Building 2, Multimedia University, Sepang, 63000, Selangor, Malaysia",
+      "phone": "+601153774376"
+    },
+    "items": [
+      {
+        "name": "Gadget-Apple iPhone",
+        "qty": 1,
+        "weight": "0.37kg"
+      }
+    ],
+    "history": [
+      {
+        "status": "Log at Service Center",
+        "timestamp": "2025-09-29 16:20",
+        "location": "Johor Bahru, Malaysia",
+        "details": "documentation required"
+      },
+      {
+        "status": "Processing",
+        "timestamp": "2025-09-19 20:40",
+        "location": "DHL-JHR Hub, Johor Bahru",
+        "details": "Package processed for CLexp coverage"
+      },
+      {
+        "status": "Documentation Received",
+        "timestamp": "2025-10-01 08:20",
+        "location": "DHL-JHR Hub, Johor Bahru",
+        "details": "Package arrived at facility"
+      },
+      {
+        "status": "In Transit",
+        "timestamp": "2025-10-01 11:20",
+        "location": "DHL-JHR Hub, Johor Bahru",
+        "details": "Package departed facility"
+      },
+      {
+        "status": "In Transit",
+        "timestamp": "2025-10-01 14:15",
+        "location": "Selangor Gateway",
+        "details": "Package confirmed for destination sorting hub"
+      },
+      {
+        "status": "In Transit",
+        "timestamp": "2025-10-01 15:15",
+        "location": "Selangor Toll Hub",
+        "details": "Out for delivery"
+      }
+    ],
+    "service": "DHL Express MyParcel",
+    "estDelivery": "2025-10-01",
+    "currentStatus": "In Transit",
+    "insurance": "MYR 0",
+    "dimensions": "30x20x10 cm",
+    "paymentMethod": "DuitNow QR"
+  },
+  "MYJJGMFR1607_5": {
+    "sender": {
+      "name": "Tech Distributors Ltd",
+      "address": "789 Industrial Park, Penang, Malaysia",
+      "phone": "+60169874523",
+      "email": "sales@techdist.com"
+    },
+    "receiver": {
+      "name": "Sarah Johnson",
+      "address": "321 Beach Road, Kuala Lumpur, 50250, Malaysia",
+      "phone": "+60123459876",
+      "email": "sarah.j@email.com"
+    },
+    "items": [
+      {
+        "name": "Laptop",
+        "qty": 1,
+        "weight": "2.5kg",
+        "value": "MYR 3500"
+      },
+      {
+        "name": "Accessories Kit",
+        "qty": 1,
+        "weight": "0.8kg",
+        "value": "MYR 250"
+      }
+    ],
+    "history": [
+      {
+        "status": "Parcel at destination depot - Awaiting delivery",
+        "timestamp": "2025-07-19 14:47",
+        "location": "Skudai",
+        "details": "Package ready for delivery"
+      },
+      {
+        "status": "Shipment was processed at Destination Sorting Hub",
+        "timestamp": "2025-07-19 09:40",
+        "location": "Skudai",
+        "details": "Package sorted for final delivery"
+      },
+      {
+        "status": "Arrived at facility",
+        "timestamp": "2025-07-18 08:37",
+        "location": "Skudai",
+        "details": "Package arrived at local facility"
+      },
+      {
+        "status": "Departed from facility",
+        "timestamp": "2025-07-18 05:36",
+        "location": "Kuala Lumpur Hub",
+        "details": "Package en route to destination"
+      },
+      {
+        "status": "Processing",
+        "timestamp": "2025-07-17 16:20",
+        "location": "Kuala Lumpur Hub",
+        "details": "Package received and processed"
+      }
+    ],
+    "service": "DHL Express Domestic",
+    "estDelivery": "2025-07-20",
+    "currentStatus": "Awaiting Delivery",
+    "weight": "3.3kg",
+    "dimensions": "45x30x15 cm",
+    "insurance": "MYR 3750",
+    "paymentMethod": "Credit Card"
+  },
   "SHZ025-2991": {
     "sender": {
       "name": "SHIRAZ APPLE STORE-iDevice",
@@ -23,13 +220,19 @@
     "history": [
       {
         "status": "Claim Approved",
-        "timestamp": "2024-10-18 10:30:00",
+        "timestamp": "2025-10-15 10:30",
         "location": "Shiraz Apple Store",
         "details": "iDevice claim has been approved and ready for activation"
+      },
+      {
+        "status": "Awaiting Activation",
+        "timestamp": "2025-10-15 10:30",
+        "location": "Shiraz Apple Store",
+        "details": "Waiting for customer to complete activation process"
       }
     ],
     "service": "DHL Express",
-    "estDelivery": "2024-10-25",
+    "estDelivery": "2025-10-20",
     "currentStatus": "Awaiting Activation",
     "weight": "0.5kg",
     "dimensions": "30x20x10 cm",
