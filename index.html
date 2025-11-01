@@ -173,6 +173,285 @@
     max-height: 400px;
     overflow-y: auto;
   }
+
+  /* Enhanced Admin Styles */
+  .admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  .admin-stat-card {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .admin-stat-number {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .admin-stat-label {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  .admin-table th {
+    background: var(--primary);
+    color: white;
+    padding: 10px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .admin-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e9ecef;
+  }
+  .admin-table tr:hover {
+    background: #f8f9fa;
+  }
+  .status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .status-delivered {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .status-transit {
+    background-color: #cce7ff;
+    color: #004085;
+  }
+  .status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  .status-out {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  .search-highlight {
+    background-color: #fff3cd;
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  /* Enhanced Admin Dashboard */
+  .admin-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .dashboard-card h5 {
+    margin: 0 0 10px 0;
+    color: var(--primary);
+    font-size: 14px;
+  }
+  
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  .quick-action-btn {
+    padding: 8px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+  }
+  
+  .quick-action-btn:hover {
+    background: #e9ecef;
+    border-color: #0071e3;
+  }
+  
+  .recent-activity {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .activity-item {
+    padding: 8px;
+    border-bottom: 1px solid #f1f3f4;
+    font-size: 12px;
+  }
+  
+  .activity-item:last-child {
+    border-bottom: none;
+  }
+  
+  .activity-time {
+    color: var(--muted);
+    font-size: 11px;
+  }
+  
+  /* Modal enhancements */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    position: relative;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Timeline styles for tracking history */
+  .timeline {
+    position: relative;
+    padding-left: 20px;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e0e0e0;
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f1f3f4;
+  }
+  
+  .timeline-item:last-child {
+    border-bottom: none;
+  }
+  
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -25px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  
+  .timeline-status {
+    font-weight: 600;
+    color: var(--dark);
+  }
+  
+  .timeline-location {
+    color: var(--muted);
+    font-size: 12px;
+  }
+  
+  .timeline-time {
+    color: var(--muted);
+    font-size: 11px;
+  }
+  
+  /* Enhanced table styles */
+  .table-actions {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+  }
+  
+  .btn-icon {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  .btn-edit {
+    background: #ffc107;
+    color: white;
+  }
+  
+  .btn-delete {
+    background: #dc3545;
+    color: white;
+  }
+  
+  .btn-view {
+    background: #17a2b8;
+    color: white;
+  }
+  
+  /* Status indicator styles */
+  .status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .status-indicator.delivered {
+    background: #28a745;
+  }
+  
+  .status-indicator.transit {
+    background: #007bff;
+  }
+  
+  .status-indicator.pending {
+    background: #ffc107;
+  }
+  
+  .status-indicator.delayed {
+    background: #dc3545;
+  }
 </style>
 </head>
 <body>
@@ -222,6 +501,7 @@
           <button class="btn-pdf" onclick="downloadPDF()">📄 Download PDF</button>
           <button class="btn-print" onclick="openPrintModal()">🖨️ Print Preview</button>
           <button class="btn-plain" onclick="resetForm()">Reset</button>
+          <button class="btn-success" onclick="saveClaimToUserData()" style="background:#059669;color:white">Save Claim</button>
         </div>
         <p class="footer-note">Claim ID format: <code>SHZ025-{last4digitsOfPhone}</code></p>
       </div>
@@ -253,57 +533,150 @@
         <p class="footer-note">After copying: open Mail/Outlook and paste into body.</p>
       </div>
 
-      <!-- Admin Management Section -->
+      <!-- Enhanced Admin Management Section -->
       <div class="card admin-section" id="adminSection">
         <h4 style="margin:0 0 8px 0">Admin Management</h4>
-        <div class="admin-tabs">
-          <button class="admin-tab active" onclick="switchAdminTab('emailManagement')">Email Management</button>
-          <button class="admin-tab" onclick="switchAdminTab('userManagement')">User Management</button>
-          <button class="admin-tab" onclick="switchAdminTab('trackingManagement')">Tracking Management</button>
-          <button class="admin-tab" onclick="switchAdminTab('jsonOutput')">JSON Output</button>
-        </div>
         
-        <!-- Email Management Tab -->
-        <div id="emailManagement" class="admin-content active">
-          <h5 style="margin:0 0 10px 0">Email Templates</h5>
-          <div class="btns" style="margin-top:10px">
-            <button class="btn-primary" onclick="generateClaimEmail()">Generate Claim Approved Email</button>
-            <button class="btn-outline" onclick="generateDeliveryEmail()">Generate Delivery Email</button>
+        <!-- Admin Stats -->
+        <div class="admin-stats">
+          <div class="admin-stat-card">
+            <div class="admin-stat-number" id="totalShipments">0</div>
+            <div class="admin-stat-label">Total Shipments</div>
           </div>
-          
-          <h5 style="margin:15px 0 8px 0">Email Preview</h5>
-          <div id="emailPreview" class="delivery-email-preview">
-            <div style="text-align:center;padding:40px;color:#888">Email preview will appear here</div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-number" id="inTransitShipments">0</div>
+            <div class="admin-stat-label">In Transit</div>
           </div>
-          
-          <div class="btns" style="margin-top:10px">
-            <button class="btn-primary" onclick="copyCurrentEmail()">Copy Current Email</button>
+          <div class="admin-stat-card">
+            <div class="admin-stat-number" id="deliveredShipments">0</div>
+            <div class="admin-stat-label">Delivered</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-number" id="pendingShipments">0</div>
+            <div class="admin-stat-label">Pending</div>
           </div>
         </div>
         
-        <!-- User Management Tab -->
-        <div id="userManagement" class="admin-content">
-          <h5 style="margin:0 0 10px 0">User Data Management</h5>
-          <div class="btns">
-            <button class="btn-primary" onclick="loadUserData()">Load User Data</button>
-            <button class="btn-outline" onclick="showAddUserForm()">Add New User</button>
+        <!-- Enhanced Admin Dashboard -->
+        <div class="admin-dashboard">
+          <div class="dashboard-card">
+            <h5>📊 Quick Stats</h5>
+            <div class="admin-stats">
+              <div class="admin-stat-card">
+                <div class="admin-stat-number" id="totalShipments2">0</div>
+                <div class="admin-stat-label">Total Shipments</div>
+              </div>
+              <div class="admin-stat-card">
+                <div class="admin-stat-number" id="inTransitShipments2">0</div>
+                <div class="admin-stat-label">In Transit</div>
+              </div>
+              <div class="admin-stat-card">
+                <div class="admin-stat-number" id="deliveredShipments2">0</div>
+                <div class="admin-stat-label">Delivered</div>
+              </div>
+              <div class="admin-stat-card">
+                <div class="admin-stat-number" id="pendingShipments2">0</div>
+                <div class="admin-stat-label">Pending</div>
+              </div>
+            </div>
           </div>
           
-          <div id="userList" class="user-list" style="margin-top:10px">
-            <div style="text-align:center;padding:20px;color:#888">No user data loaded</div>
+          <div class="dashboard-card">
+            <h5>⚡ Quick Actions</h5>
+            <div class="quick-actions">
+              <div class="quick-action-btn" onclick="showAddShipmentForm()">
+                <div>➕ Add Shipment</div>
+              </div>
+              <div class="quick-action-btn" onclick="showModal('bulkImportModal')">
+                <div>📥 Bulk Import</div>
+              </div>
+              <div class="quick-action-btn" onclick="exportJSON()">
+                <div>📤 Export JSON</div>
+              </div>
+              <div class="quick-action-btn" onclick="showModal('settingsModal')">
+                <div>⚙️ Settings</div>
+              </div>
+            </div>
           </div>
           
-          <!-- Add/Edit User Form -->
-          <div id="userForm" class="tracking-update" style="display:none; margin-top:10px">
-            <h5 style="margin:0 0 10px 0" id="userFormTitle">Add New User</h5>
+          <div class="dashboard-card">
+            <h5>🔍 Search & Filters</h5>
             <div class="tracking-row">
-              <input id="userId" type="text" placeholder="User ID (e.g., 000111222)">
-              <select id="userStatus">
-                <option value="Delivered">Delivered</option>
+              <input type="text" id="searchInput" placeholder="Search by name, phone, or tracking..." style="flex:2">
+              <select id="statusFilter" onchange="renderShipmentTable()">
+                <option value="">All Statuses</option>
                 <option value="In Transit">In Transit</option>
-                <option value="Awaiting Delivery">Awaiting Delivery</option>
-                <option value="Awaiting Activation">Awaiting Activation</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Pending">Pending</option>
+                <option value="Out for Delivery">Out for Delivery</option>
               </select>
+            </div>
+          </div>
+          
+          <div class="dashboard-card">
+            <h5>📋 Recent Activity</h5>
+            <div id="recentActivity" class="recent-activity">
+              <div class="activity-item">No recent activity</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="admin-tabs">
+          <button class="admin-tab active" onclick="switchAdminTab('shipmentManagement')">📦 Shipment Management</button>
+          <button class="admin-tab" onclick="switchAdminTab('emailManagement')">✉️ Email Management</button>
+          <button class="admin-tab" onclick="switchAdminTab('jsonOutput')">🔧 JSON Output</button>
+        </div>
+        
+        <!-- Shipment Management Tab -->
+        <div id="shipmentManagement" class="admin-content active">
+          <h5 style="margin:0 0 10px 0">Shipment List</h5>
+          
+          <div class="table-container" style="margin-top:10px">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Tracking #</th>
+                  <th>Receiver Name</th>
+                  <th>Phone</th>
+                  <th>Status</th>
+                  <th>Service</th>
+                  <th>Est. Delivery</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="shipmentTableBody"></tbody>
+            </table>
+          </div>
+          
+          <!-- Add/Edit Shipment Form -->
+          <div id="shipmentForm" class="tracking-update" style="display:none; margin-top:10px">
+            <h5 style="margin:0 0 10px 0" id="shipmentFormTitle">Add New Shipment</h5>
+            <input type="hidden" id="shipmentTracking">
+            
+            <div class="tracking-row">
+              <select id="shipmentStatus">
+                <option value="In Transit">In Transit</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Pending">Pending</option>
+                <option value="Out for Delivery">Out for Delivery</option>
+                <option value="Picked up">Picked up</option>
+                <option value="Arrived at facility">Arrived at facility</option>
+              </select>
+              <input id="shipmentService" type="text" placeholder="Service (e.g., DHL Express)">
+            </div>
+            
+            <div class="tracking-row">
+              <input id="shipmentEstDelivery" type="date" placeholder="Est. Delivery">
+              <input id="shipmentWeight" type="text" placeholder="Weight">
+            </div>
+            
+            <div class="tracking-row">
+              <input id="shipmentDimensions" type="text" placeholder="Dimensions">
+              <input id="shipmentInsurance" type="text" placeholder="Insurance">
+            </div>
+            
+            <div class="tracking-row">
+              <input id="shipmentPaymentMethod" type="text" placeholder="Payment Method">
             </div>
             
             <h6 style="margin:10px 0 5px 0">Sender Information</h6>
@@ -330,56 +703,63 @@
               <input id="receiverEmail" type="email" placeholder="Receiver Email">
             </div>
             
+            <!-- Items Section -->
+            <h6 style="margin:10px 0 5px 0">Items</h6>
+            <div id="itemsList" class="tracking-history"></div>
+            <div class="tracking-row" style="margin-top:5px">
+              <input id="newItemName" type="text" placeholder="Item Name" style="flex:2">
+              <input id="newItemQty" type="number" placeholder="Qty" min="1" value="1">
+              <input id="newItemWeight" type="text" placeholder="Weight">
+              <input id="newItemValue" type="text" placeholder="Value">
+              <button class="btn-small btn-primary" onclick="addItem()">Add</button>
+            </div>
+            
+            <!-- Tracking History Section -->
+            <h6 style="margin:10px 0 5px 0">Tracking History</h6>
+            <div id="trackingHistoryList" class="tracking-history"></div>
+            <div class="tracking-row" style="margin-top:5px">
+              <input id="newTrackingStatus" type="text" placeholder="Status">
+              <input id="newTrackingTimestamp" type="datetime-local">
+              <input id="newTrackingLocation" type="text" placeholder="Location">
+              <input id="newTrackingDetails" type="text" placeholder="Details">
+              <button class="btn-small btn-primary" onclick="addTrackingUpdate()">Add</button>
+            </div>
+            
             <div class="btns">
-              <button class="btn-primary" onclick="saveUser()">Save User</button>
-              <button class="btn-outline" onclick="cancelUserEdit()">Cancel</button>
+              <button class="btn-primary" onclick="saveShipment()">Save Shipment</button>
+              <button class="btn-outline" onclick="cancelShipmentEdit()">Cancel</button>
             </div>
           </div>
         </div>
         
-        <!-- Tracking Management Tab -->
-        <div id="trackingManagement" class="admin-content">
-          <h5 style="margin:0 0 10px 0">Tracking Information Update</h5>
-          <div class="tracking-update">
-            <div class="tracking-row">
-              <select id="trackingStatus">
-                <option value="Picked up">Picked up</option>
-                <option value="In transit">In transit</option>
-                <option value="Arrived at facility">Arrived at facility</option>
-                <option value="Out for delivery">Out for delivery</option>
-                <option value="Delivered">Delivered</option>
-                <option value="Claim Approved">Claim Approved</option>
-                <option value="Awaiting Activation">Awaiting Activation</option>
-                <option value="Custom">Custom Status</option>
-              </select>
-              <input id="trackingLocation" type="text" placeholder="Location">
-            </div>
-            <div class="tracking-row">
-              <input id="trackingDate" type="text" placeholder="YYYY-MM-DD">
-              <input id="trackingTime" type="text" placeholder="HH:MM">
-            </div>
-            <div class="tracking-row">
-              <input id="trackingDetails" type="text" placeholder="Details" style="flex:2">
-            </div>
-            <div class="btns">
-              <button class="btn-primary" onclick="addTrackingUpdate()">Add Tracking Update</button>
-              <button class="btn-outline" onclick="clearTrackingForm()">Clear Form</button>
-            </div>
+        <!-- Email Management Tab -->
+        <div id="emailManagement" class="admin-content">
+          <h5 style="margin:0 0 10px 0">Email Templates</h5>
+          <div class="btns" style="margin-top:10px">
+            <button class="btn-primary" onclick="generateClaimEmail()">Generate Claim Approved Email</button>
+            <button class="btn-outline" onclick="generateDeliveryEmail()">Generate Delivery Email</button>
+            <button class="btn-outline" onclick="generateTrackingEmail()">Generate Tracking Email</button>
           </div>
           
-          <h5 style="margin:15px 0 8px 0">Tracking History</h5>
-          <div id="trackingHistory" class="tracking-history">
-            <div style="text-align:center;padding:20px;color:#888">No tracking history yet</div>
+          <h5 style="margin:15px 0 8px 0">Email Preview</h5>
+          <div id="emailPreview" class="delivery-email-preview">
+            <div style="text-align:center;padding:40px;color:#888">Email preview will appear here</div>
+          </div>
+          
+          <div class="btns" style="margin-top:10px">
+            <button class="btn-primary" onclick="copyCurrentEmail()">Copy Current Email</button>
+            <button class="btn-outline" onclick="testEmail()">Send Test Email</button>
           </div>
         </div>
         
         <!-- JSON Output Tab -->
         <div id="jsonOutput" class="admin-content">
-          <h5 style="margin:0 0 10px 0">User Data JSON</h5>
+          <h5 style="margin:0 0 10px 0">Shipment Data JSON</h5>
           <div class="btns">
             <button class="btn-primary" onclick="generateJSON()">Generate JSON</button>
             <button class="btn-outline" onclick="copyJSON()">Copy JSON</button>
             <button class="btn-plain" onclick="exportJSON()">Export JSON File</button>
+            <button class="btn-outline" onclick="validateJSON()">Validate JSON</button>
           </div>
           
           <div id="jsonPreview" class="json-output" style="margin-top:10px">
@@ -407,6 +787,65 @@
     <div style="margin-top: 20px; text-align: center;">
       <button class="btn-print" onclick="printFromModal()">🖨️ Print Now</button>
       <button class="btn-outline" onclick="closePrintModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Enhanced Modals -->
+<div id="shipmentDetailModal" class="modal-overlay">
+  <div class="modal-content" style="max-width: 600px;">
+    <button class="modal-close" onclick="closeModal('shipmentDetailModal')">✕</button>
+    <h4>Shipment Details</h4>
+    <div id="shipmentDetailContent"></div>
+  </div>
+</div>
+
+<div id="bulkImportModal" class="modal-overlay">
+  <div class="modal-content" style="max-width: 700px;">
+    <button class="modal-close" onclick="closeModal('bulkImportModal')">✕</button>
+    <h4>Bulk Import Shipments</h4>
+    <div class="tracking-update">
+      <textarea id="bulkImportData" class="form-control" rows="10" placeholder='Paste JSON data here...'></textarea>
+      <p class="small" style="margin-top: 10px;">
+        Format: {"trackingNumber": { "sender": {...}, "receiver": {...}, ... }}
+      </p>
+      <div class="btns" style="margin-top: 15px;">
+        <button class="btn-primary" onclick="processBulkImport()">Import Data</button>
+        <button class="btn-outline" onclick="closeModal('bulkImportModal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="settingsModal" class="modal-overlay">
+  <div class="modal-content" style="max-width: 500px;">
+    <button class="modal-close" onclick="closeModal('settingsModal')">✕</button>
+    <h4>Admin Settings</h4>
+    <div class="tracking-update">
+      <h5>Email Templates</h5>
+      <div class="tracking-row">
+        <input type="text" id="companyName" class="form-control" placeholder="Company Name" value="Shiraz Apple Store">
+        <input type="email" id="companyEmail" class="form-control" placeholder="Company Email" value="shiraz@icloud.com">
+      </div>
+      
+      <h5 style="margin-top: 15px;">Default Sender Information</h5>
+      <div class="tracking-row">
+        <input type="text" id="defaultSenderName" class="form-control" placeholder="Sender Name" value="AGENT SERVICE BOOT-Shiraz Apple Store">
+        <input type="text" id="defaultSenderPhone" class="form-control" placeholder="Sender Phone" value="01119873046">
+      </div>
+      <div class="tracking-row">
+        <input type="text" id="defaultSenderAddress" class="form-control" placeholder="Sender Address" value="Seksyen 16, 40200 Shah Alam, Selangor, Malaysia">
+      </div>
+      
+      <h5 style="margin-top: 15px;">API Settings</h5>
+      <div class="tracking-row">
+        <input type="text" id="apiBaseUrl" class="form-control" placeholder="API Base URL" value="https://mygtsplus.github.io/dhl-tracking/?">
+      </div>
+      
+      <div class="btns" style="margin-top: 15px;">
+        <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
+        <button class="btn-outline" onclick="closeModal('settingsModal')">Cancel</button>
+      </div>
     </div>
   </div>
 </div>
@@ -457,8 +896,9 @@ const PRODUCTS = {
 // Global user data storage
 let userData = {};
 let currentEmailHtml = "";
-let currentUserId = "";
+let currentTrackingNumber = "";
 let trackingHistory = [];
+let items = [];
 
 function showToast(msg, bg='#0071e3'){ 
   const t=document.getElementById('toast'); 
@@ -815,7 +1255,7 @@ function downloadPDF(){
   });
 }
 
-// Admin Management Functions
+// Enhanced Admin Management Functions
 function toggleAdminSection() {
   const adminSection = document.getElementById('adminSection');
   const password = prompt("Enter admin password:");
@@ -847,6 +1287,608 @@ function switchAdminTab(tabId) {
   event.target.classList.add('active');
 }
 
+// Modal management
+function showModal(modalId) {
+  document.getElementById(modalId).style.display = 'flex';
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = 'none';
+}
+
+// Close modals when clicking outside
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('modal-overlay')) {
+    event.target.style.display = 'none';
+  }
+});
+
+// Updated loadUserData function to fetch from JSON file
+async function loadUserData() {
+  try {
+    const response = await fetch('userdata-management.json');
+    if (!response.ok) {
+      throw new Error('Failed to load user data');
+    }
+    userData = await response.json();
+    renderShipmentTable();
+    updateStats();
+    showToast('Shipment data loaded successfully');
+  } catch (error) {
+    console.error('Error loading user data:', error);
+    // Fallback to demo data if file not found
+    userData = {
+      "GTS728976543210": {
+        "service": "Express Delivery",
+        "estDelivery": "2025-10-29",
+        "currentStatus": "Picked up",
+        "weight": "0.85kg",
+        "dimensions": "40×30×20 cm",
+        "insurance": "MYR 385.00",
+        "paymentMethod": "QR DuitNow",
+        "sender": {
+          "name": "AGENT SERVICE BOOT-Shiraz Apple Store",
+          "address": "Seksyen 16, 40200 Shah Alam, Selangor, Malaysia",
+          "phone": "01119873046",
+          "email": ""
+        },
+        "receiver": {
+          "name": "Nur Zahirah Aniesa",
+          "address": "3705, Jalam Jati 6 , Bandar Putra, Johor, Malaysia.",
+          "phone": "0138570767",
+          "email": ""
+        },
+        "items": [
+          {
+            "qty": 1,
+            "name": "idevice iphone15 promax",
+            "weight": "0.41 kg",
+            "value": "MYR "
+          }
+        ],
+        "history": [
+          {
+            "status": "Package Document Pre-checked",
+            "timestamp": "2025-10-26T09:52",
+            "location": "Sender Office, Shah Alam, Selangor",
+            "details": "Waybill, consignment note, and delivery declaration created and verified by Logistics agent. Shipment officially registered in system."
+          },
+          {
+            "status": "Picked Up",
+            "timestamp": "2025-10-27T13:21",
+            "location": "MyGTS Service Center, Shah Alam",
+            "details": "Parcel collected and scanned by courier; labeled and sealed for northbound transit."
+          }
+        ]
+      }
+    };
+    renderShipmentTable();
+    updateStats();
+    showToast('Using demo data - file not found', '#f97316');
+  }
+}
+
+// Enhanced shipment table rendering with view details
+function renderShipmentTable() {
+  const tableBody = document.getElementById('shipmentTableBody');
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const status = document.getElementById('statusFilter').value;
+  
+  let filteredShipments = Object.entries(userData).filter(([track, d]) => {
+    const r = d.receiver || {};
+    const name = r.name || '';
+    const phone = r.phone || '';
+    
+    const matchesSearch = name.toLowerCase().includes(query) || 
+                         phone.includes(query) || 
+                         track.includes(query);
+    const matchesStatus = !status || d.currentStatus === status;
+    
+    return matchesSearch && matchesStatus;
+  });
+  
+  let html = '';
+  
+  filteredShipments.forEach(([track, d]) => {
+    const r = d.receiver || {};
+    const name = r.name || '';
+    const phone = r.phone || '';
+    
+    const highlightedName = highlightText(name, query);
+    const highlightedPhone = highlightText(phone, query);
+    const highlightedTrack = highlightText(track, query);
+    
+    // Status badge with indicator
+    let statusClass = 'status-transit';
+    let statusIndicator = 'transit';
+    if (d.currentStatus === 'Delivered') {
+      statusClass = 'status-delivered';
+      statusIndicator = 'delivered';
+    } else if (d.currentStatus === 'Pending') {
+      statusClass = 'status-pending';
+      statusIndicator = 'pending';
+    } else if (d.currentStatus === 'Out for Delivery') {
+      statusClass = 'status-out';
+      statusIndicator = 'delayed';
+    }
+    
+    html += `
+      <tr>
+        <td><strong>${highlightedTrack}</strong></td>
+        <td>${highlightedName}</td>
+        <td>${highlightedPhone}</td>
+        <td>
+          <span class="status-indicator ${statusIndicator}"></span>
+          <span class="status-badge ${statusClass}">${d.currentStatus || ''}</span>
+        </td>
+        <td>${d.service || ''}</td>
+        <td>${d.estDelivery || ''}</td>
+        <td>
+          <div class="table-actions">
+            <button class="btn-icon btn-view" onclick="viewShipmentDetails('${track}')" title="View Details">👁️</button>
+            <button class="btn-icon btn-edit" onclick="editShipment('${track}')" title="Edit">✏️</button>
+            <button class="btn-icon btn-delete" onclick="deleteShipment('${track}')" title="Delete">🗑️</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  });
+  
+  tableBody.innerHTML = html;
+  
+  if (filteredShipments.length === 0) {
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7" class="text-center py-4">No shipments found matching your criteria</td>
+      </tr>
+    `;
+  }
+}
+
+function highlightText(text, query) {
+  if (!query) return text;
+  
+  const regex = new RegExp(`(${query})`, 'gi');
+  return text.replace(regex, '<span class="search-highlight">$1</span>');
+}
+
+function updateStats() {
+  const total = Object.keys(userData).length;
+  const inTransit = Object.values(userData).filter(s => s.currentStatus === 'In Transit').length;
+  const delivered = Object.values(userData).filter(s => s.currentStatus === 'Delivered').length;
+  const pending = Object.values(userData).filter(s => s.currentStatus === 'Pending').length;
+  
+  document.getElementById('totalShipments').textContent = total;
+  document.getElementById('inTransitShipments').textContent = inTransit;
+  document.getElementById('deliveredShipments').textContent = delivered;
+  document.getElementById('pendingShipments').textContent = pending;
+  
+  // Update dashboard stats too
+  document.getElementById('totalShipments2').textContent = total;
+  document.getElementById('inTransitShipments2').textContent = inTransit;
+  document.getElementById('deliveredShipments2').textContent = delivered;
+  document.getElementById('pendingShipments2').textContent = pending;
+}
+
+function showAddShipmentForm() {
+  document.getElementById('shipmentForm').style.display = 'block';
+  document.getElementById('shipmentFormTitle').textContent = 'Add New Shipment';
+  clearShipmentForm();
+  trackingHistory = [];
+  items = [];
+  renderItems();
+  renderTrackingHistory();
+}
+
+function clearShipmentForm() {
+  document.getElementById('shipmentTracking').value = '';
+  document.getElementById('shipmentStatus').value = 'Pending';
+  document.getElementById('shipmentService').value = '';
+  document.getElementById('shipmentEstDelivery').value = '';
+  document.getElementById('shipmentWeight').value = '';
+  document.getElementById('shipmentDimensions').value = '';
+  document.getElementById('shipmentInsurance').value = '';
+  document.getElementById('shipmentPaymentMethod').value = '';
+  document.getElementById('senderName').value = '';
+  document.getElementById('senderPhone').value = '';
+  document.getElementById('senderAddress').value = '';
+  document.getElementById('senderEmail').value = '';
+  document.getElementById('receiverName').value = '';
+  document.getElementById('receiverPhone').value = '';
+  document.getElementById('receiverAddress').value = '';
+  document.getElementById('receiverEmail').value = '';
+}
+
+function editShipment(trackingNumber) {
+  const shipment = userData[trackingNumber];
+  currentTrackingNumber = trackingNumber;
+  
+  document.getElementById('shipmentForm').style.display = 'block';
+  document.getElementById('shipmentFormTitle').textContent = 'Edit Shipment';
+  
+  document.getElementById('shipmentTracking').value = trackingNumber;
+  document.getElementById('shipmentStatus').value = shipment.currentStatus;
+  document.getElementById('shipmentService').value = shipment.service;
+  document.getElementById('shipmentEstDelivery').value = shipment.estDelivery;
+  document.getElementById('shipmentWeight').value = shipment.weight;
+  document.getElementById('shipmentDimensions').value = shipment.dimensions;
+  document.getElementById('shipmentInsurance').value = shipment.insurance;
+  document.getElementById('shipmentPaymentMethod').value = shipment.paymentMethod;
+  document.getElementById('senderName').value = shipment.sender.name;
+  document.getElementById('senderPhone').value = shipment.sender.phone;
+  document.getElementById('senderAddress').value = shipment.sender.address;
+  document.getElementById('senderEmail').value = shipment.sender.email || '';
+  document.getElementById('receiverName').value = shipment.receiver.name;
+  document.getElementById('receiverPhone').value = shipment.receiver.phone;
+  document.getElementById('receiverAddress').value = shipment.receiver.address;
+  document.getElementById('receiverEmail').value = shipment.receiver.email || '';
+  
+  // Load items and tracking history for this shipment
+  items = [...shipment.items];
+  trackingHistory = [...shipment.history];
+  renderItems();
+  renderTrackingHistory();
+}
+
+function renderItems() {
+  const itemsList = document.getElementById('itemsList');
+  itemsList.innerHTML = '';
+  
+  if (items.length === 0) {
+    itemsList.innerHTML = '<div style="text-align:center;padding:10px;color:#888">No items added</div>';
+    return;
+  }
+  
+  items.forEach((item, index) => {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'tracking-item';
+    itemDiv.innerHTML = `
+      <div>
+        <strong>${item.name}</strong><br>
+        <small>Qty: ${item.qty} | Weight: ${item.weight} | Value: ${item.value}</small>
+      </div>
+      <div class="tracking-actions">
+        <button class="btn-small btn-danger" onclick="removeItem(${index})">Delete</button>
+      </div>
+    `;
+    itemsList.appendChild(itemDiv);
+  });
+}
+
+function addItem() {
+  const name = document.getElementById('newItemName').value;
+  const qty = document.getElementById('newItemQty').value;
+  const weight = document.getElementById('newItemWeight').value;
+  const value = document.getElementById('newItemValue').value;
+  
+  if (!name) {
+    alert('Please enter item name');
+    return;
+  }
+  
+  items.push({
+    name,
+    qty: parseInt(qty) || 1,
+    weight,
+    value
+  });
+  
+  renderItems();
+  
+  // Clear inputs
+  document.getElementById('newItemName').value = '';
+  document.getElementById('newItemQty').value = '';
+  document.getElementById('newItemWeight').value = '';
+  document.getElementById('newItemValue').value = '';
+}
+
+function removeItem(index) {
+  if (confirm("Are you sure you want to delete this item?")) {
+    items.splice(index, 1);
+    renderItems();
+  }
+}
+
+function renderTrackingHistory() {
+  const historyContainer = document.getElementById('trackingHistoryList');
+  
+  if (trackingHistory.length === 0) {
+    historyContainer.innerHTML = '<div style="text-align:center;padding:10px;color:#888">No tracking history yet</div>';
+    return;
+  }
+  
+  let html = '';
+  trackingHistory.forEach((item, index) => {
+    html += `
+      <div class="tracking-item">
+        <div>
+          <strong>${item.status}</strong><br>
+          <small>${item.location} • ${item.timestamp}</small><br>
+          <small>${item.details || 'No additional details'}</small>
+        </div>
+        <div class="tracking-actions">
+          <button class="btn-small btn-danger" onclick="removeTrackingUpdate(${index})">Delete</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  historyContainer.innerHTML = html;
+}
+
+function addTrackingUpdate() {
+  const status = document.getElementById('newTrackingStatus').value;
+  const timestamp = document.getElementById('newTrackingTimestamp').value;
+  const location = document.getElementById('newTrackingLocation').value;
+  const details = document.getElementById('newTrackingDetails').value;
+  
+  if (!status || !timestamp || !location) {
+    alert("Please fill in all required fields");
+    return;
+  }
+  
+  const update = {
+    status,
+    timestamp,
+    location,
+    details
+  };
+  
+  trackingHistory.push(update);
+  renderTrackingHistory();
+  
+  // Clear form
+  document.getElementById('newTrackingStatus').value = '';
+  document.getElementById('newTrackingTimestamp').value = '';
+  document.getElementById('newTrackingLocation').value = '';
+  document.getElementById('newTrackingDetails').value = '';
+}
+
+function removeTrackingUpdate(index) {
+  if (confirm("Are you sure you want to delete this tracking update?")) {
+    trackingHistory.splice(index, 1);
+    renderTrackingHistory();
+  }
+}
+
+// Helper function to calculate future dates
+function getFutureDate(days) {
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  return date.toISOString().split('T')[0];
+}
+
+// Enhanced saveShipment function with JSON structure
+function saveShipment() {
+  const trackingNumber = document.getElementById('shipmentTracking').value || generateTrackingNumber();
+  
+  if (!trackingNumber) {
+    alert('Please enter a Tracking Number');
+    return;
+  }
+  
+  // Create shipment object with proper JSON structure
+  const shipment = {
+    service: document.getElementById('shipmentService').value || "Express Delivery",
+    estDelivery: document.getElementById('shipmentEstDelivery').value || getFutureDate(5),
+    currentStatus: document.getElementById('shipmentStatus').value || "Pending",
+    weight: document.getElementById('shipmentWeight').value || "0.5kg",
+    dimensions: document.getElementById('shipmentDimensions').value || "30x20x10 cm",
+    insurance: document.getElementById('shipmentInsurance').value || "MYR 0",
+    paymentMethod: document.getElementById('shipmentPaymentMethod').value || "Sponsored",
+    sender: {
+      name: document.getElementById('senderName').value,
+      address: document.getElementById('senderAddress').value,
+      phone: document.getElementById('senderPhone').value,
+      email: document.getElementById('senderEmail').value || ""
+    },
+    receiver: {
+      name: document.getElementById('receiverName').value,
+      address: document.getElementById('receiverAddress').value,
+      phone: document.getElementById('receiverPhone').value,
+      email: document.getElementById('receiverEmail').value || ""
+    },
+    items: [...items],
+    history: [...trackingHistory]
+  };
+  
+  userData[trackingNumber] = shipment;
+  renderShipmentTable();
+  updateStats();
+  document.getElementById('shipmentForm').style.display = 'none';
+  showToast('Shipment saved successfully');
+  
+  // Auto-generate JSON output
+  generateJSON();
+  updateRecentActivity(`Shipment saved: ${trackingNumber}`);
+}
+
+function generateTrackingNumber() {
+  let newTracking;
+  do {
+    // Generate a random 16-digit number
+    newTracking = 'GTS' + Math.floor(1000000000000 + Math.random() * 9000000000000).toString();
+  } while (userData[newTracking]);
+  
+  return newTracking;
+}
+
+function deleteShipment(trackingNumber) {
+  if (confirm(`Are you sure you want to delete shipment ${trackingNumber}?`)) {
+    delete userData[trackingNumber];
+    renderShipmentTable();
+    updateStats();
+    showToast('Shipment deleted successfully');
+    updateRecentActivity(`Shipment deleted: ${trackingNumber}`);
+  }
+}
+
+function cancelShipmentEdit() {
+  document.getElementById('shipmentForm').style.display = 'none';
+}
+
+// View shipment details
+function viewShipmentDetails(trackingNumber) {
+  const shipment = userData[trackingNumber];
+  if (!shipment) return;
+  
+  const content = `
+    <div class="tracking-update">
+      <h5>Shipment ${trackingNumber}</h5>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+        <div>
+          <strong>Service:</strong> ${shipment.service || 'N/A'}<br>
+          <strong>Status:</strong> ${shipment.currentStatus || 'N/A'}<br>
+          <strong>Est. Delivery:</strong> ${shipment.estDelivery || 'N/A'}<br>
+          <strong>Weight:</strong> ${shipment.weight || 'N/A'}<br>
+        </div>
+        <div>
+          <strong>Dimensions:</strong> ${shipment.dimensions || 'N/A'}<br>
+          <strong>Insurance:</strong> ${shipment.insurance || 'N/A'}<br>
+          <strong>Payment Method:</strong> ${shipment.paymentMethod || 'N/A'}<br>
+        </div>
+      </div>
+      
+      <h6>Sender Information</h6>
+      <div class="tracking-update" style="margin-bottom: 15px;">
+        <strong>Name:</strong> ${shipment.sender.name || 'N/A'}<br>
+        <strong>Address:</strong> ${shipment.sender.address || 'N/A'}<br>
+        <strong>Phone:</strong> ${shipment.sender.phone || 'N/A'}<br>
+        <strong>Email:</strong> ${shipment.sender.email || 'N/A'}<br>
+      </div>
+      
+      <h6>Receiver Information</h6>
+      <div class="tracking-update" style="margin-bottom: 15px;">
+        <strong>Name:</strong> ${shipment.receiver.name || 'N/A'}<br>
+        <strong>Address:</strong> ${shipment.receiver.address || 'N/A'}<br>
+        <strong>Phone:</strong> ${shipment.receiver.phone || 'N/A'}<br>
+        <strong>Email:</strong> ${shipment.receiver.email || 'N/A'}<br>
+      </div>
+      
+      <h6>Items</h6>
+      <div class="tracking-history">
+        ${shipment.items && shipment.items.length > 0 ? 
+          shipment.items.map(item => `
+            <div class="tracking-item">
+              <strong>${item.name}</strong><br>
+              <small>Qty: ${item.qty} | Weight: ${item.weight} | Value: ${item.value}</small>
+            </div>
+          `).join('') : 
+          '<div class="text-center">No items</div>'
+        }
+      </div>
+      
+      <h6 style="margin-top: 15px;">Tracking History</h6>
+      <div class="timeline">
+        ${shipment.history && shipment.history.length > 0 ? 
+          shipment.history.map(entry => `
+            <div class="timeline-item">
+              <div class="timeline-status">${entry.status}</div>
+              <div class="timeline-location">${entry.location}</div>
+              <div class="timeline-time">${entry.timestamp}</div>
+              <div>${entry.details || ''}</div>
+            </div>
+          `).join('') : 
+          '<div class="text-center">No tracking history</div>'
+        }
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('shipmentDetailContent').innerHTML = content;
+  showModal('shipmentDetailModal');
+}
+
+// Bulk import functionality
+function processBulkImport() {
+  const jsonText = document.getElementById('bulkImportData').value;
+  
+  if (!jsonText) {
+    showToast('Please enter JSON data', '#dc2626');
+    return;
+  }
+  
+  try {
+    const importedData = JSON.parse(jsonText);
+    
+    // Validate the structure
+    if (typeof importedData !== 'object') {
+      throw new Error('Invalid JSON format');
+    }
+    
+    // Merge with existing data
+    userData = { ...userData, ...importedData };
+    
+    // Update UI
+    renderShipmentTable();
+    updateStats();
+    updateRecentActivity(`Bulk import: ${Object.keys(importedData).length} shipments added`);
+    
+    closeModal('bulkImportModal');
+    showToast(`Successfully imported ${Object.keys(importedData).length} shipments`);
+    
+    // Auto-generate JSON
+    generateJSON();
+    
+  } catch (err) {
+    showToast('Invalid JSON format: ' + err.message, '#dc2626');
+  }
+}
+
+// Settings management
+function saveSettings() {
+  const settings = {
+    companyName: document.getElementById('companyName').value,
+    companyEmail: document.getElementById('companyEmail').value,
+    defaultSenderName: document.getElementById('defaultSenderName').value,
+    defaultSenderPhone: document.getElementById('defaultSenderPhone').value,
+    defaultSenderAddress: document.getElementById('defaultSenderAddress').value,
+    apiBaseUrl: document.getElementById('apiBaseUrl').value
+  };
+  
+  localStorage.setItem('shirazSettings', JSON.stringify(settings));
+  showToast('Settings saved successfully');
+  closeModal('settingsModal');
+}
+
+function loadSettings() {
+  const savedSettings = localStorage.getItem('shirazSettings');
+  if (savedSettings) {
+    const settings = JSON.parse(savedSettings);
+    
+    document.getElementById('companyName').value = settings.companyName || 'Shiraz Apple Store';
+    document.getElementById('companyEmail').value = settings.companyEmail || 'shiraz@icloud.com';
+    document.getElementById('defaultSenderName').value = settings.defaultSenderName || 'AGENT SERVICE BOOT-Shiraz Apple Store';
+    document.getElementById('defaultSenderPhone').value = settings.defaultSenderPhone || '01119873046';
+    document.getElementById('defaultSenderAddress').value = settings.defaultSenderAddress || 'Seksyen 16, 40200 Shah Alam, Selangor, Malaysia';
+    document.getElementById('apiBaseUrl').value = settings.apiBaseUrl || 'https://mygtsplus.github.io/dhl-tracking/?';
+  }
+}
+
+// Recent activity tracking
+function updateRecentActivity(message) {
+  const activityList = document.getElementById('recentActivity');
+  const now = new Date();
+  const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  
+  const activityItem = document.createElement('div');
+  activityItem.className = 'activity-item';
+  activityItem.innerHTML = `
+    <div>${message}</div>
+    <div class="activity-time">${timeString}</div>
+  `;
+  
+  // Add to top of list
+  activityList.insertBefore(activityItem, activityList.firstChild);
+  
+  // Keep only last 5 activities
+  while (activityList.children.length > 5) {
+    activityList.removeChild(activityList.lastChild);
+  }
+}
+
+// Enhanced email generation
 function generateClaimEmail() {
   const data = {
     name: esc(document.getElementById('name').value),
@@ -927,6 +1969,68 @@ function generateDeliveryEmail() {
   showToast('Delivery email generated');
 }
 
+function generateTrackingEmail() {
+  const data = {
+    name: esc(document.getElementById('name').value),
+    address: esc(document.getElementById('address').value),
+    product: PRODUCTS[esc(document.getElementById('product').value)].title,
+    claimId: esc(document.getElementById('claim').value)
+  };
+  
+  const trackingEmailHtml = `
+<!-- START TRACKING EMAIL HTML -->
+<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f5f5f7;padding:20px;">
+  <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.08);border:1px solid #e5e5e7;">
+    <div style="background:#0071e3;color:#fff;text-align:center;padding:24px;">
+      <h1 style="margin:6px 0 0 0;font-size:22px;line-height:1.05;">📦 Your Package is On The Way!</h1>
+      <p style="margin:6px 0 0 0;font-size:14px;opacity:0.95;">Track your shipment in real-time</p>
+    </div>
+
+    <div style="padding:18px;">
+      <h2 style="font-size:18px;margin:6px 0 8px 0;">Hello ${data.name},</h2>
+      <p style="font-size:15px;color:#111;line-height:1.45;margin:0 0 12px 0;">
+        Your ${data.product} has been shipped and is on its way to you.
+      </p>
+
+      <div style="background:#f5f5f7;padding:12px;border-left:4px solid #0071e3;border-radius:10px;margin:12px 0;font-size:14px;color:#111;">
+        <strong style="display:block;margin-bottom:8px;font-size:15px;">📋 Shipping Details</strong>
+        <div>🆔 <strong>Tracking Number:</strong> ${data.claimId}</div>
+        <div>📱 <strong>Product:</strong> ${data.product}</div>
+        <div>🏠 <strong>Delivery Address:</strong> ${data.address}</div>
+        <div>⏰ <strong>Estimated Delivery:</strong> 3-5 business days</div>
+      </div>
+
+      <div style="text-align:center;margin:20px 0;">
+        <a href="https://shiraz-apple-store.com/track/${data.claimId}" target="_blank" style="display:inline-block;background:#0071e3;color:#fff;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:700;font-size:16px;">Track Your Package</a>
+      </div>
+
+      <p style="font-size:14px;color:#333;margin:0 0 10px 0;">
+        You'll receive another email when your package is out for delivery.
+      </p>
+
+      <p style="font-size:14px;color:#333;margin:0 0 10px 0;">
+        If you have any questions about your delivery, please contact us at <a href="mailto:shiraz@icloud.com" style="color:#0071e3;">shiraz@icloud.com</a>.
+      </p>
+
+      <p style="font-size:14px;color:#333;margin:0;">
+        Thank you,<br>
+        <strong>Shiraz Apple Store</strong>
+      </p>
+    </div>
+
+    <div style="background:#f5f5f7;padding:20px;text-align:center;font-size:12px;color:#6d6d6f;border-top:1px solid #e5e5e7;">
+      ShirazAppleStore | Digital Service Center | Shah Alam, Selangor.<br>
+      (873719-X) Copyright ©2025
+    </div>
+  </div>
+</div>
+<!-- END TRACKING EMAIL HTML -->`;
+  
+  document.getElementById('emailPreview').innerHTML = trackingEmailHtml;
+  currentEmailHtml = trackingEmailHtml;
+  showToast('Tracking email generated');
+}
+
 function copyCurrentEmail() {
   if (!currentEmailHtml) {
     showToast('Please generate an email first', '#dc2626');
@@ -935,6 +2039,18 @@ function copyCurrentEmail() {
   
   copyToClipboard(currentEmailHtml);
   showToast('Email copied to clipboard');
+}
+
+function testEmail() {
+  if (!currentEmailHtml) {
+    showToast('Please generate an email first', '#dc2626');
+    return;
+  }
+  
+  // In a real application, this would send the email via an API
+  // For demo purposes, we'll just show a success message
+  showToast('Test email sent successfully (demo)');
+  updateRecentActivity('Test email sent');
 }
 
 function copyToClipboard(text) {
@@ -946,263 +2062,7 @@ function copyToClipboard(text) {
   document.body.removeChild(textarea);
 }
 
-// Updated loadUserData function to fetch from JSON file
-async function loadUserData() {
-  try {
-    const response = await fetch('userdata-management.json');
-    if (!response.ok) {
-      throw new Error('Failed to load user data');
-    }
-    userData = await response.json();
-    renderUserList();
-    showToast('User data loaded successfully');
-  } catch (error) {
-    console.error('Error loading user data:', error);
-    // Fallback to demo data if file not found
-    userData = {
-      "SHZ025-2991": {
-        "sender": {
-          "name": "SHIRAZ APPLE STORE-iDevice",
-          "address": "Jalan Baru, 81200 Johor Bahru, Johor Darul Ta'zim, Malaysia",
-          "phone": "+601119873046",
-          "email": "shiraz@icloud.com"
-        },
-        "receiver": {
-          "name": "AHMAD LUQMAN HAKIM BIN ROSIDI",
-          "address": "KAMPUNG BUKIT MAK LIPAH MAHLIGAI 16400 MELOR KELANTAN",
-          "phone": "+60139062991",
-          "email": "luq2208@gmail.com"
-        },
-        "items": [
-          {
-            "name": "Apple iPhone 15 Pro Max",
-            "qty": 1,
-            "weight": "0.5kg",
-            "value": "Sponsored"
-          }
-        ],
-        "history": [
-          {
-            "status": "Claim Approved",
-            "timestamp": "2025-10-15 10:30",
-            "location": "Shiraz Apple Store",
-            "details": "iDevice claim has been approved and ready for activation"
-          },
-          {
-            "status": "Awaiting Activation",
-            "timestamp": "2025-10-15 10:30",
-            "location": "Shiraz Apple Store",
-            "details": "Waiting for customer to complete activation process"
-          }
-        ],
-        "service": "DHL Express",
-        "estDelivery": "2025-10-20",
-        "currentStatus": "Awaiting Activation",
-        "weight": "0.5kg",
-        "dimensions": "30x20x10 cm",
-        "insurance": "MYR 0",
-        "paymentMethod": "Sponsored"
-      }
-    };
-    renderUserList();
-    showToast('Using demo data - file not found', '#f97316');
-  }
-}
-
-function renderUserList() {
-  const userList = document.getElementById('userList');
-  
-  if (Object.keys(userData).length === 0) {
-    userList.innerHTML = '<div style="text-align:center;padding:20px;color:#888">No user data available</div>';
-    return;
-  }
-  
-  let html = '';
-  for (const userId in userData) {
-    const user = userData[userId];
-    html += `
-      <div class="user-item" onclick="editUser('${userId}')">
-        <div><strong>${user.receiver.name}</strong> (${userId})</div>
-        <div style="font-size:12px;color:#666">${user.receiver.address}</div>
-        <div style="font-size:12px;color:#666">Status: ${user.currentStatus}</div>
-      </div>
-    `;
-  }
-  
-  userList.innerHTML = html;
-}
-
-function showAddUserForm() {
-  document.getElementById('userForm').style.display = 'block';
-  document.getElementById('userFormTitle').textContent = 'Add New User';
-  clearUserForm();
-  trackingHistory = [];
-  renderTrackingHistory();
-}
-
-function clearUserForm() {
-  document.getElementById('userId').value = '';
-  document.getElementById('userStatus').value = 'Awaiting Activation';
-  document.getElementById('senderName').value = '';
-  document.getElementById('senderPhone').value = '';
-  document.getElementById('senderAddress').value = '';
-  document.getElementById('senderEmail').value = '';
-  document.getElementById('receiverName').value = '';
-  document.getElementById('receiverPhone').value = '';
-  document.getElementById('receiverAddress').value = '';
-  document.getElementById('receiverEmail').value = '';
-}
-
-function editUser(userId) {
-  const user = userData[userId];
-  currentUserId = userId;
-  
-  document.getElementById('userForm').style.display = 'block';
-  document.getElementById('userFormTitle').textContent = 'Edit User';
-  
-  document.getElementById('userId').value = userId;
-  document.getElementById('userStatus').value = user.currentStatus;
-  document.getElementById('senderName').value = user.sender.name;
-  document.getElementById('senderPhone').value = user.sender.phone;
-  document.getElementById('senderAddress').value = user.sender.address;
-  document.getElementById('senderEmail').value = user.sender.email || '';
-  document.getElementById('receiverName').value = user.receiver.name;
-  document.getElementById('receiverPhone').value = user.receiver.phone;
-  document.getElementById('receiverAddress').value = user.receiver.address;
-  document.getElementById('receiverEmail').value = user.receiver.email || '';
-  
-  // Load tracking history for this user
-  trackingHistory = [...user.history];
-  renderTrackingHistory();
-}
-
-// Helper function to calculate future dates
-function getFutureDate(days) {
-  const date = new Date();
-  date.setDate(date.getDate() + days);
-  return date.toISOString().split('T')[0];
-}
-
-// Updated saveUser function to maintain JSON structure
-function saveUser() {
-  const userId = document.getElementById('userId').value;
-  if (!userId) {
-    alert('Please enter a User ID');
-    return;
-  }
-  
-  // Create user object with proper JSON structure
-  const user = {
-    sender: {
-      name: document.getElementById('senderName').value,
-      address: document.getElementById('senderAddress').value,
-      phone: document.getElementById('senderPhone').value,
-      email: document.getElementById('senderEmail').value || undefined
-    },
-    receiver: {
-      name: document.getElementById('receiverName').value,
-      address: document.getElementById('receiverAddress').value,
-      phone: document.getElementById('receiverPhone').value,
-      email: document.getElementById('receiverEmail').value || undefined
-    },
-    items: [
-      { 
-        name: "Apple iPhone", 
-        qty: 1, 
-        weight: "0.5kg", 
-        value: "Sponsored" 
-      }
-    ],
-    history: [...trackingHistory],
-    service: "DHL Express",
-    estDelivery: getFutureDate(5), // 5 days from now
-    currentStatus: document.getElementById('userStatus').value,
-    weight: "1.0kg",
-    dimensions: "30x20x10 cm",
-    insurance: "MYR 0",
-    paymentMethod: "Sponsored"
-  };
-  
-  userData[userId] = user;
-  renderUserList();
-  document.getElementById('userForm').style.display = 'none';
-  showToast('User saved successfully');
-  
-  // Auto-generate JSON output
-  generateJSON();
-}
-
-function cancelUserEdit() {
-  document.getElementById('userForm').style.display = 'none';
-}
-
-function addTrackingUpdate() {
-  const status = document.getElementById('trackingStatus').value;
-  const location = document.getElementById('trackingLocation').value;
-  const date = document.getElementById('trackingDate').value;
-  const time = document.getElementById('trackingTime').value;
-  const details = document.getElementById('trackingDetails').value;
-  
-  if (!status || !location || !date || !time) {
-    alert("Please fill in all required fields");
-    return;
-  }
-  
-  const update = {
-    status,
-    location,
-    timestamp: `${date} ${time}`,
-    details
-  };
-  
-  trackingHistory.push(update);
-  renderTrackingHistory();
-  clearTrackingForm();
-  showToast('Tracking update added');
-}
-
-function clearTrackingForm() {
-  document.getElementById('trackingLocation').value = '';
-  document.getElementById('trackingDate').value = '';
-  document.getElementById('trackingTime').value = '';
-  document.getElementById('trackingDetails').value = '';
-}
-
-function renderTrackingHistory() {
-  const historyContainer = document.getElementById('trackingHistory');
-  
-  if (trackingHistory.length === 0) {
-    historyContainer.innerHTML = '<div style="text-align:center;padding:20px;color:#888">No tracking history yet</div>';
-    return;
-  }
-  
-  let html = '';
-  trackingHistory.forEach((item, index) => {
-    html += `
-      <div class="tracking-item">
-        <div>
-          <strong>${item.status}</strong><br>
-          <small>${item.location} • ${item.timestamp}</small><br>
-          <small>${item.details || 'No additional details'}</small>
-        </div>
-        <div class="tracking-actions">
-          <button class="btn-small btn-danger" onclick="removeTrackingUpdate(${index})">Delete</button>
-        </div>
-      </div>
-    `;
-  });
-  
-  historyContainer.innerHTML = html;
-}
-
-function removeTrackingUpdate(index) {
-  if (confirm("Are you sure you want to delete this tracking update?")) {
-    trackingHistory.splice(index, 1);
-    renderTrackingHistory();
-    showToast('Tracking update removed');
-  }
-}
-
+// JSON Management Functions
 function generateJSON() {
   const jsonOutput = JSON.stringify(userData, null, 2);
   document.getElementById('jsonPreview').textContent = jsonOutput;
@@ -1233,7 +2093,153 @@ function exportJSON() {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
   showToast('JSON file exported');
+  updateRecentActivity('JSON data exported');
 }
+
+// JSON validation
+function validateJSON() {
+  const jsonOutput = document.getElementById('jsonPreview').textContent;
+  
+  if (!jsonOutput || jsonOutput === 'JSON output will appear here') {
+    showToast('Please generate JSON first', '#dc2626');
+    return;
+  }
+  
+  try {
+    JSON.parse(jsonOutput);
+    showToast('JSON is valid', '#059669');
+  } catch (err) {
+    showToast('Invalid JSON: ' + err.message, '#dc2626');
+  }
+}
+
+// New function to save claim form data to userData
+function saveClaimToUserData() {
+  const claimId = document.getElementById('claim').value;
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const address = document.getElementById('address').value;
+  const product = document.getElementById('product').value;
+  const qty = document.getElementById('qty').value;
+  
+  if (!claimId) {
+    showToast('Please generate a Claim ID first', '#dc2626');
+    return;
+  }
+  
+  const shipment = {
+    service: "Express Delivery",
+    estDelivery: getFutureDate(5),
+    currentStatus: "Awaiting Activation",
+    weight: "0.5kg",
+    dimensions: "30x20x10 cm",
+    insurance: "MYR 0",
+    paymentMethod: "Sponsored",
+    sender: {
+      name: "AGENT SERVICE BOOT-Shiraz Apple Store",
+      address: "Seksyen 16, 40200 Shah Alam, Selangor, Malaysia",
+      phone: "01119873046",
+      email: "shiraz@icloud.com"
+    },
+    receiver: {
+      name: name,
+      address: address,
+      phone: phone,
+      email: email
+    },
+    items: [
+      {
+        name: PRODUCTS[product].title,
+        qty: parseInt(qty) || 1,
+        weight: "0.5kg",
+        value: "Sponsored"
+      }
+    ],
+    history: [
+      {
+        status: "Claim Approved",
+        timestamp: new Date().toISOString().split('T')[0] + " " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+        location: "Shiraz Apple Store",
+        details: "iDevice claim has been approved and ready for activation"
+      }
+    ]
+  };
+  
+  userData[claimId] = shipment;
+  
+  // If admin section is open, update the table and stats
+  if (document.getElementById('adminSection').style.display === 'block') {
+    renderShipmentTable();
+    updateStats();
+    generateJSON();
+  }
+  
+  updateRecentActivity(`New claim saved: ${claimId}`);
+  showToast('Claim saved to database');
+}
+
+// Initialize enhanced features
+document.addEventListener('DOMContentLoaded', function() {
+  loadSettings();
+  
+  // Initialize recent activity with current time
+  updateRecentActivity('Admin panel initialized');
+  
+  // Auto-save every 2 minutes
+  setInterval(function() {
+    if (Object.keys(userData).length > 0) {
+      localStorage.setItem('shirazUserDataBackup', JSON.stringify(userData));
+    }
+  }, 120000);
+  
+  // Load backup data if available
+  const backupData = localStorage.getItem('shirazUserDataBackup');
+  if (backupData && Object.keys(userData).length === 0) {
+    try {
+      userData = JSON.parse(backupData);
+      if (document.getElementById('adminSection').style.display === 'block') {
+        renderShipmentTable();
+        updateStats();
+        showToast('Restored data from backup', '#059669');
+      }
+    } catch (e) {
+      console.error('Failed to load backup data:', e);
+    }
+  }
+});
+
+// Enhanced search with debouncing
+let searchTimeout;
+document.getElementById('searchInput').addEventListener('input', function() {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    renderShipmentTable();
+  }, 300);
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(event) {
+  // Ctrl/Cmd + S to save
+  if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+    event.preventDefault();
+    if (document.getElementById('shipmentForm').style.display === 'block') {
+      saveShipment();
+    } else {
+      generateJSON();
+    }
+  }
+  
+  // Escape to close modals
+  if (event.key === 'Escape') {
+    const modals = document.querySelectorAll('.modal-overlay');
+    modals.forEach(modal => {
+      if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+      }
+    });
+  }
+});
 
 // Initialize the app
 window.onload = function() {
